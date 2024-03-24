@@ -44,6 +44,7 @@ export function NavBarLayout({ children }: { children: ReactNode }) {
                 width: 100%;
 
                 text-align: center;
+                font-weight: bold;
               `}
             >
               {header.title}
@@ -77,10 +78,11 @@ const logoWrapperCss = css`
 `;
 const mainSectionCss = css`
   min-height: 75vh;
+  height: 100%;
 `;
 const copyrightFooterCss = css`
   text-align: center;
-  margin: 1rem 0 0 0;
+  margin: 8vh 0 0 0;
 `;
 
 const headerCss = css`
@@ -120,5 +122,5 @@ const backButtonCss = css`
 
 const bottomFillerCss = css`
   width: 1rem;
-  height: 7rem;
+  height: 14vh;
 `;

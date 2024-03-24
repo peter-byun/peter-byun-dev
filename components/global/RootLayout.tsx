@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 import { bgColor1 } from '../../styles/variables';
+import { ACss } from '../base/A';
 
 export function RootLayout({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
@@ -48,6 +49,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
               background-color: ${bgColor1};
               padding: 0;
               margin: 0;
+              height: 100%;
               font-family:
                 GmarketSansMedium,
                 -apple-system,
@@ -67,6 +69,8 @@ export function RootLayout({ children }: { children: ReactNode }) {
                 flex-direction: column;
                 align-items: center;
 
+                height: 100%;
+
                 padding: 0 1rem;
                 :has(.post-root) {
                   padding: 0;
@@ -83,6 +87,7 @@ export function RootLayout({ children }: { children: ReactNode }) {
             a {
               white-space: pre-line;
               word-break: break-word;
+              ${ACss}
             }
 
             h1 {

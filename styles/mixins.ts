@@ -12,6 +12,7 @@ export const pageRoot = css`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 
   & > * {
     ${indexContentWidth}
@@ -31,7 +32,7 @@ export const textInput = css`
 
   :focus {
     outline: none;
-    box-shadow: ${primaryColor2Active} 0px 0px 10px 5px;
+    box-shadow: ${primaryColor2Active} 0px 0px 8px 2px;
     -webkit-appearance: none;
   }
 `;

@@ -115,6 +115,7 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
                   css={postItemCss}
                   className="posts-item"
                   level={2}
+                  tabIndex={-1}
                 >
                   <h3
                     css={css`

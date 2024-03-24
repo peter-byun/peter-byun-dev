@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export function Hr() {
+export function Hr({ margin }: { margin: string }) {
   return (
     <hr
       css={css`
@@ -10,6 +10,7 @@ export function Hr() {
         height: 0.5px;
 
         border: none;
+        margin: ${margin ?? 0};
       `}
     ></hr>
   );

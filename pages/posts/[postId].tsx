@@ -149,12 +149,13 @@ export default function Post({
               <Button
                 onClick={throttledHandleLikeClick}
                 custom
-                css={
-                  isLikeAnimationOn &&
-                  css`
-                    animation: ${animationLike} 0.7s;
-                  `
-                }
+                css={css`
+                  padding: 7px 0px;
+
+                  ${isLikeAnimationOn
+                    ? 'animation: ${animationLike} 0.7s;'
+                    : ''}
+                `}
               >
                 <HeartSvg
                   css={
@@ -168,6 +169,7 @@ export default function Post({
               <div
                 css={css`
                   color: ${textSecondary};
+                  line-height: 1rem;
                 `}
               >
                 {postLikes}
@@ -196,8 +198,8 @@ export default function Post({
               }}
               css={css`
                 color: ${textActive};
-                width: 100%;
-                margin: 8px 0 0 0;
+                width: fit-content;
+                margin: 25px 0 0 0;
               `}
               custom
             >
@@ -205,7 +207,7 @@ export default function Post({
             </Button>
           </aside>
 
-          <Hr />
+          <Hr margin="50px 0px" />
 
           <CommentsSection
             postId={postId}
@@ -279,6 +281,11 @@ export const PostRoot = styled.section`
 
     .post-aside-left {
       position: relative;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       .like-button-wrapper {
         text-align: center;
         color: ${primaryColor2Inactive};

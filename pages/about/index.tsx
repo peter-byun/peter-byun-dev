@@ -4,11 +4,18 @@ import Layout from '../../components/global/Layout';
 import { Container } from '../../components/base/Container';
 import { A } from '../../components/base/A';
 import { pageRoot } from '../../styles/mixins';
+import { css } from '@emotion/react';
 
 const About = () => {
   return (
     <section css={pageRoot}>
-      <Container level={2}>
+      <Container
+        level={2}
+        css={css`
+          top: 25%;
+          position: absolute;
+        `}
+      >
         Hello! I'm Peter.
         <br /> <br />
         I'm a web developer, and my motto is to create an immersive web

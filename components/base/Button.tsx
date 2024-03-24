@@ -49,6 +49,7 @@ export const Button = ({
 
 const buttonCss = css`
   cursor: pointer;
+  transition: background-color 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
   &.button-base {
     background-color: ${primaryColor2Inactive};
@@ -67,7 +68,7 @@ const buttonCss = css`
     &:focus {
       background-color: ${primaryColor2Active};
       color: ${textActive};
-      box-shadow: 0px 0px 10px 1px ${primaryColor2Active};
+      box-shadow: 0px 0px 8px 1px ${primaryColor2Active};
     }
   }
 

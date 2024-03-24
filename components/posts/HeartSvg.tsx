@@ -13,7 +13,7 @@ export const HeartSvg = (props: SvgProps) => {
       height={150}
       x="0"
       y="0"
-      viewBox="-50 -50 400 400"
+      viewBox="-50 -50 400 300"
       fill={heartRed}
       {...props}
     >

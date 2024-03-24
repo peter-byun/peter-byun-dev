@@ -15,7 +15,7 @@ export const bgColor3Active = '#4e4e4e';
 
 export const primaryColor1 = '#3527f0';
 
-export const primaryColor2Active = '#695dff';
+export const primaryColor2Active = '#5b4ff8f1';
 export const primaryColor2Inactive = '#5549fcf1';
 
 export const primaryColor3Active = '#4e5ffd';

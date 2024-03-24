@@ -1,20 +1,20 @@
 import { css } from '@emotion/react';
 import {
-  primaryColor2Active,
-  primaryColor2Inactive,
+  primaryColor3Active,
+  primaryColor3Inactive,
 } from '../../styles/variables';
 import { BaseComponentProps } from '../../types/component-types';
 import { AnchorAttributes } from '../../types/dom-types';
 
 type AnchorProps = BaseComponentProps<AnchorAttributes>;
 
-const ACss = css`
-  color: ${primaryColor2Inactive};
+export const ACss = css`
+  color: ${primaryColor3Inactive};
   text-decoration: none;
   cursor: pointer;
   :hover,
   :active {
-    color: ${primaryColor2Active};
+    color: ${primaryColor3Active};
   }
 `;
 
