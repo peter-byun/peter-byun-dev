@@ -39,7 +39,7 @@ const LinkWrapper = (props: LinkWrapperProps) => {
         text-decoration: none;
       `}
     >
-      <Button className={linkWrapperClass} custom={true}>
+      <Button className={linkWrapperClass} custom={true} tabIndex={-1}>
         {isLinkActive ? IconActive : IconInactive}
         {label}
       </Button>
