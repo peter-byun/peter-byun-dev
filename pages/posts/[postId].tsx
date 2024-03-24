@@ -152,7 +152,7 @@ export default function Post({
                 css={
                   isLikeAnimationOn &&
                   css`
-                    animation: ${animationLike} 0.4s;
+                    animation: ${animationLike} 0.7s;
                   `
                 }
               >
@@ -160,7 +160,7 @@ export default function Post({
                   css={
                     isLikeAnimationOn &&
                     css`
-                      animation: ${animationGradient} 0.4s;
+                      animation: ${animationGradient} 0.7s;
                     `
                   }
                 ></HeartSvg>
@@ -322,21 +322,15 @@ const animationGradient = keyframes`
 `;
 const animationLike = keyframes`
   from, to {
-    transform: scale(1) rotateZ(0);
+    transform: scale(1);
   }
   20% {
-    transform: scale(1.1) rotateZ(-15deg);
-  }
-  40% {
-    transform: scale(1.15) rotateZ(15deg);
+    transform: scale(1.1);
   }
   50% {
-    transform: scale(1.2) rotateZ(0deg);
-  }
-  60% {
-    transform: scale(1.15) rotateZ(-15deg);
+    transform: scale(1);
   }
   80% {
-    transform: scale(1) rotateZ(0);
+    transform: scale(1.2);
   }
 `;
