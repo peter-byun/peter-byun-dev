@@ -28,6 +28,7 @@ import { getPosts } from '../../fetch/blog-apis';
 import { string } from 'zod';
 import { TIME_IN_SEC } from '../../constants/time-constants';
 import { Hr } from '../../components/base/Hr';
+import { copyToClipboard } from '../../utils/copy-to-clipboard';
 
 export const getStaticPaths = (async () => {
   const posts = (await getPosts()) ?? [];
@@ -183,9 +184,8 @@ export default function Post({
 
                 try {
                   if (!navigator.share) {
-                    alert(
-                      `Your device does not support the browser's share feature.`
-                    );
+                    copyToClipboard(location.href);
+                    alert('The URL is copied to clipboard.');
                     return;
                   }
 
