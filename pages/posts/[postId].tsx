@@ -262,11 +262,13 @@ export const PostRoot = styled.section`
     .post-content {
       width: 100%;
       text-align: left;
+
       line-height: 2rem;
     }
 
     pre {
       code {
+        line-height: 1rem;
         span {
           white-space: pre-line;
         }
