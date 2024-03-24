@@ -149,13 +149,16 @@ export default function Post({
               <Button
                 onClick={throttledHandleLikeClick}
                 custom
-                css={css`
-                  padding: 7px 0px;
-
-                  ${isLikeAnimationOn
-                    ? 'animation: ${animationLike} 0.7s;'
-                    : ''}
-                `}
+                css={[
+                  css`
+                    padding: 7px 0px;
+                  `,
+                  isLikeAnimationOn
+                    ? css`
+                        animation: ${animationLike} 0.7s;
+                      `
+                    : undefined,
+                ]}
               >
                 <HeartSvg
                   css={
@@ -259,6 +262,7 @@ export const PostRoot = styled.section`
     .post-content {
       width: 100%;
       text-align: left;
+      line-height: 2rem;
     }
 
     pre {
