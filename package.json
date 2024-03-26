@@ -36,7 +36,7 @@
     "react-hook-form": "^7.49.2",
     "react-query": "^3.39.1",
     "recoil": "^0.7.7",
-    "sharp": "^0.31.0",
+    "sharp": "^0.33.2",
     "wait-on": "^6.0.1",
     "zod": "^3.22.4"
   },
