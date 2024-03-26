@@ -24,7 +24,7 @@
     "@notionhq/client": "^1.0.4",
     "@prisma/client": "^4.0.0",
     "@vercel/analytics": "^1.1.1",
-    "@vercel/postgres": "^0.5.1",
+    "@vercel/postgres": "^0.7.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
     "highlight.js": "^11.6.0",
