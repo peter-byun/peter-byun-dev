@@ -6,7 +6,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 hljs.registerLanguage('typescript', typescript);
 import 'highlight.js/styles/github-dark.css';
 
-import { Button } from '../../components/base/Button';
+import { Button } from '../../components/base/button/Button';
 import { LoadingSpinner } from '../../components/global/LoadingSpinner';
 import { HeartSvg } from '../../components/posts/HeartSvg';
 import { CommentsSection } from '../../components/posts/CommentsSection';
@@ -100,7 +100,7 @@ export default function Post({
     });
   }, [post]);
 
-  const { data: comments, refetch: refetchComments } = useQuery(
+  const { data: comments } = useQuery(
     ['comments', postId],
     () => {
       return fetch(
@@ -127,13 +127,6 @@ export default function Post({
     }, 800);
   }, [postId, setPostLikes]);
   const [throttledHandleLikeClick] = useThrottle(handleLikeClick, 800);
-
-  const queryClient = useQueryClient();
-
-  const handleCommentSubmit = useCallback(() => {
-    queryClient.invalidateQueries('comments');
-    refetchComments();
-  }, [queryClient, refetchComments]);
 
   return (
     <PostRoot className="post-root">
@@ -215,7 +208,6 @@ export default function Post({
           <CommentsSection
             postId={postId}
             comments={comments}
-            onCommentSubmit={handleCommentSubmit}
           ></CommentsSection>
         </article>
       ) : (

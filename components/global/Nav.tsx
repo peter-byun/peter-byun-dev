@@ -8,7 +8,7 @@ import { ContactMail as AboutIconInactive } from '@emotion-icons/material-outlin
 
 import { css } from '@emotion/react';
 import { bgColor2, textActive, textInactive } from '../../styles/variables';
-import { Button } from '../base/Button';
+import { Button } from '../base/button/Button';
 
 const ROUTES = {
   home: '/',

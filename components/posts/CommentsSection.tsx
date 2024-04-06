@@ -2,18 +2,24 @@ import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { z } from 'zod';
 
-import { Button } from '../base/Button';
+import { Button } from '../base/button/Button';
 import { Input } from '../base/Input';
 import { TextArea } from '../base/TextArea';
 import { Comment as CommentData } from '../../fetch/blog-apis-types';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { fetchJson } from '../../fetch/fetch-utils';
-import { flexColumnCenter } from '../../styles/mixins';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputError } from '../base/InputError';
 import { useThrottle } from '../../utility-hooks/use-throttle';
 import { H } from '../base/H';
+import {
+  commentBottomCss,
+  commentContainerCss,
+  commentWriterCss,
+  commentWriterId,
+  commentWriterNameCss,
+} from './CommentSection.style';
 
 type CommentPayload = {
   postId: number;
@@ -22,51 +28,9 @@ type CommentPayload = {
   content: string;
 };
 
-const commentContainerCss = css`
-  width: 100%;
-  padding: 1rem 0;
-
-  :not(:last-child) {
-    border-bottom: 1px solid gray;
-  }
-`;
-const commentWriterCss = css`
-  ${flexColumnCenter}
-  width: 100%;
-  gap: 1rem;
-
-  .viewer-comment-editor {
-    width: 100%;
-
-    .text-area {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  }
-`;
-const commentWriterId = css`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-  gap: 1rem;
-`;
-const commentWriterNameCss = css`
-  color: gray;
-`;
-const commentBottomCss = css`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  line-height: 1rem;
-`;
-
 interface CommentsSectionProps {
   postId?: string | string[];
   comments?: CommentData[];
-  onCommentSubmit?: () => void;
 }
 
 type CommentFormInputs = {
@@ -75,11 +39,7 @@ type CommentFormInputs = {
   email?: string;
 };
 
-export const CommentsSection = ({
-  postId,
-  comments,
-  onCommentSubmit,
-}: CommentsSectionProps) => {
+export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
   const [commentsToShow, setCommentsToShow] = useState<
     CommentData[] | undefined
   >(Array.isArray(comments) ? [...comments] : undefined);
@@ -88,21 +48,25 @@ export const CommentsSection = ({
     Array.isArray(comments) && setCommentsToShow([...comments]);
   }, [comments]);
 
-  const { mutate } = useMutation<CommentData, unknown, CommentPayload>('mk', {
-    mutationFn: (commentPaylaod: CommentPayload): Promise<CommentData> => {
-      return fetchJson(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/comments`, {
-        method: 'POST',
-        body: commentPaylaod,
-      });
-    },
-    onSuccess: () => {
-      onCommentSubmit?.();
-    },
-  });
+  const queryClient = useQueryClient();
+
+  const postCommentMutation = useMutation<CommentData, unknown, CommentPayload>(
+    {
+      mutationFn: (commentPayload: CommentPayload): Promise<CommentData> => {
+        return fetchJson(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/comments`, {
+          method: 'POST',
+          body: commentPayload,
+        });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries('comments');
+      },
+    }
+  );
   const commentSubmitPayloadScheme = z.object({
-    name: z.string().min(1, 'please enter your name'),
+    name: z.string().min(1, 'Please enter your name'),
     email: z.string().optional(),
-    content: z.string().min(1, 'please enter the content'),
+    content: z.string().min(1, 'Please enter the content'),
   });
 
   const {
@@ -110,6 +74,7 @@ export const CommentsSection = ({
     handleSubmit,
     formState: { errors },
     watch,
+    reset: resetForm,
   } = useForm<CommentFormInputs>({
     resolver: zodResolver(commentSubmitPayloadScheme),
   });
@@ -129,7 +94,9 @@ export const CommentsSection = ({
       content: watch('content'),
     };
 
-    mutate(commentPayload);
+    postCommentMutation.mutate(commentPayload);
+
+    resetForm();
   }, [postId]);
 
   const setCommentLikes = useCallback(
@@ -214,7 +181,7 @@ export const CommentsSection = ({
             id="viewer-comment-editor-text-area"
             {...register('content')}
           />
-          <Button>Submit</Button>
+          <Button isLoading={postCommentMutation.isLoading}>Submit</Button>
         </div>
 
         <InputError>{errors.content?.message}</InputError>
