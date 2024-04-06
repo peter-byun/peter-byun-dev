@@ -64,7 +64,7 @@ export async function getStaticProps() {
     props: {
       posts: Array.isArray(posts) ? posts : [],
     },
-    revalidate: TIME_IN_SEC.HOUR,
+    revalidate: TIME_IN_SEC.WEEK,
   };
 }
 
