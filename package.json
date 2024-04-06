@@ -13,6 +13,7 @@
     "partytown": "partytown copylib public/~partytown"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.550.0",
     "@emotion-icons/material": "^3.14.0",
     "@emotion-icons/material-outlined": "^3.14.0",
     "@emotion-icons/material-rounded": "^3.14.0",

@@ -2,6 +2,7 @@ import { NotionBlocksHtmlParser } from '@notion-stuff/blocks-html-parser';
 import { Client } from '@notionhq/client';
 import { BLOCK_TYPE } from '../constants/notion.constant';
 import { NotionBlock, NotionPostBlock } from '../types/notion.type';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const parsePages = (pages: any[]): NotionPostBlock[] => {
   return pages
@@ -43,16 +44,69 @@ export class NotionService {
       .list({
         block_id: blockId,
       })
-      .then((response) => {
-        const results = response.results as NotionBlock[];
+      .then(async (response) => {
+        const results = await convertNotionImageToS3Image(
+          response.results as NotionBlock[]
+        );
+
         const parser = NotionBlocksHtmlParser.getInstance();
 
+        const post = await results[0];
+
+        const resolvedResults = await Promise.all([...results]);
+
         return {
-          createdAt: results[0].created_time,
-          lastModefiedAt: results[0].last_edited_time,
+          createdAt: post.created_time,
+          lastModefiedAt: post.last_edited_time,
           title: title,
-          content: parser.parse(results),
+          content: parser.parse(resolvedResults),
         };
       });
   }
+}
+
+const S3_URL = 'http://peter-byun.dev.s3-website-us-east-1.amazonaws.com';
+const BUCKET_NAME = 'peter-byun.dev';
+const s3Client = new S3Client({
+  region: 'us-east-1',
+  credentials: {
+    accessKeyId: process.env.S3_KEY_ID ?? '',
+    secretAccessKey: process.env.S3_ACCESS_KEY ?? '',
+  },
+});
+
+function convertNotionImageToS3Image(blocks: NotionBlock[]) {
+  return blocks.map(async (block) => {
+    if (block.type !== 'image') {
+      return block;
+    }
+    if (block.image.type !== 'file') {
+      return block;
+    }
+
+    const imageName = getFilenameFromUrl(block.image.file.url);
+    const imageUrl = `images/${imageName}`;
+
+    const originalFileResponse = await fetch(block.image.file.url);
+    const originalFileBuffer = await Buffer.from(
+      await originalFileResponse.arrayBuffer()
+    );
+
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: BUCKET_NAME,
+        Key: imageUrl,
+        Body: originalFileBuffer,
+      })
+    );
+
+    block.image.file.url = `${S3_URL}/${imageUrl}`;
+
+    return block;
+  });
+}
+
+function getFilenameFromUrl(url: string) {
+  const pathname = new URL(url).pathname;
+  return pathname.substring(pathname.lastIndexOf('/') + 1);
 }

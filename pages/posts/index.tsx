@@ -49,10 +49,6 @@ async function fetchPosts() {
   const validPosts = posts.filter((post) => {
     return post;
   });
-  // TODO: Upload images to your S3 bucket("/post-images/filename" directory).
-  // 1. Parse the HTML tags
-  // 2. Find image tags
-  // 3. Replace the src attributes with "/s3-url/post-images/original-filename".
 
   if (validPosts.length > 0) {
     await postService.upsertPosts(validPosts as Prisma.PostCreateInput[]);
