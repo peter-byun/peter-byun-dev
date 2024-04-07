@@ -80,7 +80,13 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
         postsToShow?.length ? (
           postsToShow.map((post) => {
             return (
-              <Link href={`/posts/${post.id}`} key={post.id}>
+              <Link
+                href={`/posts/${post.id}`}
+                key={post.id}
+                css={css`
+                  outline: none;
+                `}
+              >
                 <ContainerButton
                   css={postItemStyle}
                   className="posts-item"

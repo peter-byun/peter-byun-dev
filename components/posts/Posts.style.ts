@@ -35,7 +35,8 @@ export const postItemStyle = css`
 
   transition: background-color 0.2s ease-in-out;
   :hover,
-  :active {
+  :active,
+  a:focus & {
     background-color: ${bgColor4};
   }
 
