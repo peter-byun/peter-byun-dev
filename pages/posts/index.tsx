@@ -76,6 +76,7 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
           onChange={handleSearchKeyUp}
         ></Input>
       </section>
+
       {shouldShowPosts ? (
         postsToShow?.length ? (
           postsToShow.map((post) => {

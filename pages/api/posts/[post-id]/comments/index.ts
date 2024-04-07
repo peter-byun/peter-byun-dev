@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { string } from 'zod';
 import { CommentService } from '../../../../../backend/services/comment.service';
 import { HTTP_METHODS } from '../../../../../backend/constants/http.verbs';
+import { allowAllOrigins } from '../../../../../backend/controllers/allowAllOrigins';
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,6 +20,8 @@ export default async function handler(
     const comments = await commentService.comments({
       where: { postId: Number(validatedPostId) },
     });
+
+    allowAllOrigins(res);
 
     res.json(comments);
   }
