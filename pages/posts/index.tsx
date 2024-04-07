@@ -16,44 +16,17 @@ import { LoadingSpinner } from '../../components/global/LoadingSpinner';
 
 import { css } from '@emotion/react';
 import { Input } from '../../components/base/Input';
-import { pageRoot } from '../../styles/mixins';
-import { bgColor4, textActive } from '../../styles/variables';
+
 import { TIME_IN_SEC } from '../../constants/time-constants';
-import { NotionService } from '../../backend/services/notion.service';
-import { PostService } from '../../backend/services/post.service';
-import { Prisma } from '@prisma/client';
 
-// TODO: Cache this in local-storage or indexed-db on dev mode
-async function fetchPosts() {
-  const notionService = new NotionService();
-  const postService = new PostService();
-
-  const notionPostBlocks = await notionService.getNotionPostBlocks();
-
-  const posts = await Promise.allSettled(
-    notionPostBlocks.map((notionPostBlock) => {
-      return notionService.getNotionPost(notionPostBlock);
-    })
-  ).then((responses) => {
-    return responses
-      .map((response) => {
-        if (response.status === 'fulfilled') {
-          return response.value;
-        } else {
-          return undefined;
-        }
-      })
-      .filter((response) => response);
-  });
-
-  const validPosts = posts.filter((post) => {
-    return post;
-  });
-
-  if (validPosts.length > 0) {
-    await postService.upsertPosts(validPosts as Prisma.PostCreateInput[]);
-  }
-}
+import {
+  postItemStyle,
+  postsNotFoundStyle,
+  postsRootStyle,
+  searchBoxStyle,
+  searchBoxInputStyle,
+} from '../../components/posts/Posts.style';
+import { fetchPosts } from '../../client-data/posts/fetchPosts';
 
 export async function getStaticProps() {
   await fetchPosts();
@@ -82,14 +55,14 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
     );
   }, [posts, searchText]);
 
-  const showPosts = useMemo(() => posts?.length, [posts]);
+  const shouldShowPosts = useMemo(() => posts?.length, [posts]);
 
   if (!posts) {
     return null;
   }
 
   return (
-    <section css={postsRootCss}>
+    <section css={postsRootStyle}>
       <section
         css={css`
           position: sticky;
@@ -98,18 +71,18 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
       >
         <Input
           placeholder="🔍 Search posts"
-          customCss={searchBoxCss}
-          customInputCss={searchBoxInputCss}
+          customCss={searchBoxStyle}
+          customInputCss={searchBoxInputStyle}
           onChange={handleSearchKeyUp}
         ></Input>
       </section>
-      {showPosts ? (
+      {shouldShowPosts ? (
         postsToShow?.length ? (
           postsToShow.map((post) => {
             return (
               <Link href={`/posts/${post.id}`} key={post.id}>
                 <ContainerButton
-                  css={postItemCss}
+                  css={postItemStyle}
                   className="posts-item"
                   level={2}
                   tabIndex={-1}
@@ -126,17 +99,7 @@ const Posts = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
             );
           })
         ) : (
-          <p
-            css={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              height: 38rem;
-            `}
-          >
-            Found Nothing 🥲
-          </p>
+          <p css={postsNotFoundStyle}>Found Nothing 🥲</p>
         )
       ) : (
         <LoadingSpinner size="sm" />
@@ -150,45 +113,3 @@ Posts.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Posts;
-
-const searchBoxCss = css`
-  margin-bottom: 10px;
-`;
-const searchBoxInputCss = css`
-  width: 100%;
-  font-size: 1.2rem;
-  padding: 1.2rem;
-`;
-
-const postsRootCss = css`
-  ${pageRoot}
-  h1 {
-    text-align: left;
-  }
-`;
-
-const postItemCss = css`
-  appearance: none;
-
-  color: ${textActive};
-
-  width: 100%;
-  max-width: 45rem;
-
-  padding: 0;
-  border: none;
-
-  margin-bottom: 10px;
-
-  cursor: pointer;
-
-  transition: background-color 0.2s ease-in-out;
-  :hover,
-  :active {
-    background-color: ${bgColor4};
-  }
-
-  h3 {
-    margin: 1.2rem;
-  }
-`;
