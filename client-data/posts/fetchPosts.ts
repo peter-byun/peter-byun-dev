@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { NotionService } from '../../backend/services/notion.service';
 import { PostService } from '../../backend/services/post.service';
 
