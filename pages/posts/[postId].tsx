@@ -118,7 +118,7 @@ export default function Post({
 
   const [isLikeAnimationOn, setIsLikeAnimationOn] = useState<boolean>();
   const handleLikeClick = useCallback(() => {
-    toast.push('Liked');
+    toast.push('Thank you 🫶🏻');
 
     setPostLikes((prevLikes) => prevLikes + 1);
     fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/posts/${postId}/likes`, {
