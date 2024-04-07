@@ -3,6 +3,7 @@ import { Client } from '@notionhq/client';
 import { BLOCK_TYPE } from '../constants/notion.constant';
 import { NotionBlock, NotionPostBlock } from '../types/notion.type';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { ENV } from '../../utils/get-env';
 
 const parsePages = (pages: any[]): NotionPostBlock[] => {
   return pages
@@ -65,13 +66,13 @@ export class NotionService {
   }
 }
 
-const S3_URL = 'http://peter-byun.dev.s3-website-us-east-1.amazonaws.com';
+const S3_URL = 'https://peter-byun.com';
 const BUCKET_NAME = 'peter-byun.dev';
 const s3Client = new S3Client({
   region: 'us-east-1',
   credentials: {
-    accessKeyId: process.env.S3_KEY_ID ?? '',
-    secretAccessKey: process.env.S3_ACCESS_KEY ?? '',
+    accessKeyId: ENV.S3_KEY_ID,
+    secretAccessKey: ENV.S3_ACCESS_KEY,
   },
 });
 

@@ -5,6 +5,12 @@ It is built with Next.js and Notion API, and deployed to Vercel. <br />
 
 ## Commands
 
+### Load Environment Variables
+You need to setup Vercel CLI first before loading environment variables from Vercel.
+```
+vercel env pull
+```
+
 ### Build
 
 ```
