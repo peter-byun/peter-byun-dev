@@ -2,8 +2,11 @@ import { Prisma } from '@prisma/client';
 import { NotionService } from '../../backend/services/notion.service';
 import { PostService } from '../../backend/services/post.service';
 
-// TODO: Cache this in local-storage or indexed-db on dev mode
 export async function fetchPosts() {
+  if (process.env.NODE_ENV === 'development') {
+    return;
+  }
+
   const notionService = new NotionService();
   const postService = new PostService();
 
