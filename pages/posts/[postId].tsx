@@ -29,6 +29,8 @@ import { string } from 'zod';
 import { TIME_IN_SEC } from '../../constants/time-constants';
 import { Hr } from '../../components/base/Hr';
 import { copyToClipboard } from '../../utils/copy-to-clipboard';
+import { useToast } from '../../components/base/toast/useToast';
+import { Toast } from '../../components/base/toast/Toast';
 
 export const getStaticPaths = (async () => {
   const posts = (await getPosts()) ?? [];
@@ -112,8 +114,12 @@ export default function Post({
     }
   );
 
+  const toast = useToast();
+
   const [isLikeAnimationOn, setIsLikeAnimationOn] = useState<boolean>();
   const handleLikeClick = useCallback(() => {
+    toast.push('Liked');
+
     setPostLikes((prevLikes) => prevLikes + 1);
     fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/posts/${postId}/likes`, {
       method: 'PATCH',
@@ -127,6 +133,26 @@ export default function Post({
     }, 800);
   }, [postId, setPostLikes]);
   const [throttledHandleLikeClick] = useThrottle(handleLikeClick, 800);
+
+  const handleShareClick = async () => {
+    const shareData = {
+      title: 'Peter Byun - Blog',
+      text: 'Read articles about web development.',
+      url: location.href,
+    };
+
+    try {
+      if (!navigator.share) {
+        copyToClipboard(location.href);
+        toast.push('URL is copied to clipboard ✅');
+        return;
+      }
+
+      await navigator.share(shareData);
+    } catch (error: unknown) {
+      toast.push('Failed to share a post 😢');
+    }
+  };
 
   return (
     <PostRoot className="post-root">
@@ -173,25 +199,7 @@ export default function Post({
             </div>
 
             <Button
-              onClick={async () => {
-                const shareData = {
-                  title: 'Peter Byun Blog',
-                  text: 'Read articles about web development',
-                  url: location.href,
-                };
-
-                try {
-                  if (!navigator.share) {
-                    copyToClipboard(location.href);
-                    alert('The URL is copied to clipboard.');
-                    return;
-                  }
-
-                  await navigator.share(shareData);
-                } catch (error: unknown) {
-                  console.log('Failed to share a post', error);
-                }
-              }}
+              onClick={handleShareClick}
               css={css`
                 color: ${textActive};
                 width: fit-content;
@@ -213,6 +221,11 @@ export default function Post({
       ) : (
         <LoadingSpinner size="sm" />
       )}
+      <Toast
+        isOpen={toast.isOpen}
+        setIsOpen={toast.setIsOpen}
+        messages={toast.messages}
+      />
     </PostRoot>
   );
 }
@@ -327,7 +340,8 @@ const animationGradient = keyframes`
 `;
 const animationLike = keyframes`
   from, to {
-    transform: scale(1);
+    transform: scale
+    (1);
   }
   20% {
     transform: scale(1.1);

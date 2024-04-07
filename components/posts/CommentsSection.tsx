@@ -20,6 +20,8 @@ import {
   commentWriterId,
   commentWriterNameCss,
 } from './CommentSection.style';
+import { Toast } from '../base/toast/Toast';
+import { useToast } from '../base/toast/useToast';
 
 type CommentPayload = {
   postId: number;
@@ -39,6 +41,10 @@ type CommentFormInputs = {
   email?: string;
 };
 
+const ERROR_MESSAGES = {
+  COMMENT_POSTING_FAILED: 'Failed to post the comment 😢',
+} as const;
+
 export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
   const [commentsToShow, setCommentsToShow] = useState<
     CommentData[] | undefined
@@ -49,6 +55,7 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
   }, [comments]);
 
   const queryClient = useQueryClient();
+  const toast = useToast();
 
   const postCommentMutation = useMutation<CommentData, unknown, CommentPayload>(
     {
@@ -60,6 +67,9 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
       },
       onSuccess: () => {
         queryClient.invalidateQueries('comments');
+      },
+      onError: () => {
+        toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
       },
     }
   );
@@ -83,7 +93,8 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
     const postIdInNumber = Number(postId);
     const parsedPostId = z.number().safeParse(postIdInNumber);
     if (!parsedPostId.success) {
-      alert('An error occurred while posting the comment.');
+      toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
+
       return;
     }
 
@@ -212,6 +223,12 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
             </div>
           </article>
         ))}
+
+      <Toast
+        isOpen={toast.isOpen}
+        setIsOpen={toast.setIsOpen}
+        messages={toast.messages}
+      />
     </section>
   );
 };
