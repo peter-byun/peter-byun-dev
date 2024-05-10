@@ -29,7 +29,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
     "highlight.js": "^11.6.0",
-    "next": "14.0.4",
+    "next": "14.1.1",
     "prettier": "^3.1.1",
     "prisma": "^4.0.0",
     "react": "18.2.0",
