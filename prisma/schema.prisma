@@ -1,0 +1,33 @@
+// DB connection configurations.
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_DB_URL_NON_POOLING")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// DB declarations
+model Post {
+  id             Int       @id @default(autoincrement())
+  title          String    @unique
+  content        String?   @db.Text
+  likes          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  lastModefiedAt DateTime? @default(now())
+  Comment        Comment[]
+}
+
+model Comment {
+  id              Int      @id @default(autoincrement())
+  content         String?  @db.Text
+  name            String
+  email           String
+  likes           Int      @default(0)
+  post            Post     @relation(fields: [postId], references: [id])
+  postId          Int
+  parentComment   Comment? @relation("CommentReplyHistory", fields: [parentCommentId], references: [id])
+  parentCommentId Int?     @unique
+  childComment    Comment? @relation("CommentReplyHistory")
+}
