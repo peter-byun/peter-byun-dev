@@ -13,6 +13,7 @@ export default function Document() {
         />
 
         <meta name="theme-color" content="#ffffff" />
+
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -37,17 +38,8 @@ export default function Document() {
           color="#5bbad5"
         />
 
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-0BKS5F6JLG"
-          type="text/partytown"
-          strategy="worker"
-        />
-        <Script
-          id="data-partytown-config"
-          data-partytown-config
-          type="text/partytown"
-          strategy="afterInteractive"
-        >
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-0BKS5F6JLG" />
+        <Script strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
