@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 
 import {
@@ -20,12 +22,13 @@ type ToastProps = {
 export const Toast = (props: ToastProps) => {
   const toastRef = useRef<HTMLDialogElement | null>(null);
 
-  useEffect(() => {
+  useEffect(function onIsOpenChange() {
     if (props.isOpen) {
       toastRef.current?.focus();
     }
   }, []);
-  useEffect(() => {
+
+  useEffect(function onWindowKeyUp() {
     const handleWindowKeyup = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return;
       props.setIsOpen(false);

@@ -6,31 +6,31 @@ import typescript from 'highlight.js/lib/languages/typescript';
 hljs.registerLanguage('typescript', typescript);
 import 'highlight.js/styles/github-dark.css';
 
-import { Button } from '../../components/base/button/Button';
-import { LoadingSpinner } from '../../components/global/LoadingSpinner';
-import { HeartSvg } from '../../components/posts/HeartSvg';
-import { CommentsSection } from '../../components/posts/CommentsSection';
-import { Post as PostData } from '../../fetch/blog-apis-types';
-import { Comment as CommentData } from '../../fetch/blog-apis-types';
+import { Button } from '../../../components/base/button/Button';
+import { LoadingSpinner } from '../../../components/global/LoadingSpinner';
+import { HeartSvg } from '../../../components/posts/HeartSvg';
+import { CommentsSection } from '../../../components/posts/CommentsSection';
+import { Post as PostData } from '../../../fetch/blog-apis-types';
+import { Comment as CommentData } from '../../../fetch/blog-apis-types';
 import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
   primaryColor2Inactive,
   textActive,
   textSecondary,
-} from '../../styles/variables';
+} from '../../../styles/variables';
 import { useRecoilState } from 'recoil';
-import { headerState } from '../../states/global/header-state';
-import Layout from '../../components/global/Layout';
-import { useThrottle } from '../../utility-hooks/use-throttle';
+import { headerState } from '../../../states/global/header-state';
+import Layout from '../../layout/RootBody';
+import { useThrottle } from '../../../utility-hooks/use-throttle';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { getPosts } from '../../fetch/blog-apis';
+import { getPosts } from '../../../fetch/blog-apis';
 import { string } from 'zod';
-import { TIME_IN_SEC } from '../../constants/time-constants';
-import { Hr } from '../../components/base/Hr';
-import { copyToClipboard } from '../../utils/copy-to-clipboard';
-import { useToast } from '../../components/base/toast/useToast';
-import { Toast } from '../../components/base/toast/Toast';
+import { TIME_IN_SEC } from '../../../constants/time-constants';
+import { Hr } from '../../../components/base/Hr';
+import { copyToClipboard } from '../../../utils/copy-to-clipboard';
+import { useToast } from '../../../components/base/toast/useToast';
+import { Toast } from '../../../components/base/toast/Toast';
 
 export const getStaticPaths = (async () => {
   const posts = (await getPosts()) ?? [];

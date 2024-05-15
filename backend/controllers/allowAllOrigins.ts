@@ -1,8 +1,7 @@
-import { NextApiResponse } from 'next';
-import { isDev } from '../../utils/environment-checker';
-
-export function allowAllOrigins(res: NextApiResponse) {
-  if (isDev()) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  }
+export function getAllowAllOriginHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
 }

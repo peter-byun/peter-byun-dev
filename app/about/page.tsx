@@ -1,12 +1,9 @@
-import { ReactElement } from 'react';
-
-import Layout from '../../components/global/Layout';
 import { Container } from '../../components/base/Container';
 import { A } from '../../components/base/A';
 import { pageRoot } from '../../styles/mixins';
 import { css } from '@emotion/react';
 
-const About = () => {
+export default function About() {
   return (
     <section css={pageRoot}>
       <Container
@@ -32,10 +29,4 @@ const About = () => {
       </Container>
     </section>
   );
-};
-
-About.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
-
-export default About;
+}

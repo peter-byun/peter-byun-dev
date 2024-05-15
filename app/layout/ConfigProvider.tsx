@@ -1,14 +1,21 @@
+'use client';
+
 import { Global, css } from '@emotion/react';
 import { Analytics } from '@vercel/analytics/react';
-import Head from 'next/head';
 import { ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 import { bgColor1 } from '../../styles/variables';
-import { ACss } from '../base/A';
+import { ACss } from '../../components/base/A';
 
-export function RootLayout({ children }: { children: ReactNode }) {
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog - Peter Byun',
+};
+
+export function ConfigProvider({ children }: { children?: ReactNode }) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -24,9 +31,6 @@ export function RootLayout({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Head>
-          <title>Blog - Peter Byun</title>
-        </Head>
         <Global
           styles={css`
             @font-face {

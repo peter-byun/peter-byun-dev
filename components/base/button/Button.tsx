@@ -1,3 +1,5 @@
+'use client';
+
 import { KeyboardEventHandler, MouseEvent, useCallback } from 'react';
 import { BaseComponentProps } from '../../../types/component-types';
 import { ButtonAttributes } from '../../../types/dom-types';
@@ -42,12 +44,13 @@ export const Button = ({
   );
 
   const shouldShowLoadingSpinner = isLoading && !custom;
+
   return (
     <button
       className={className}
       css={buttonStyle}
       onClick={onClick}
-      onKeyUp={handleClick}
+      onKeyUp={handleKeyUp}
       {...props}
     >
       {shouldShowLoadingSpinner ? null : children}
