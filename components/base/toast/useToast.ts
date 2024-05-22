@@ -7,23 +7,24 @@ export function useToast() {
 
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
-  function setMessageExpirationTimer(toastMessage: ToastMessage) {
-    setTimeout(() => {
+  function setMessageExpirationTimer(newToastMessage: ToastMessage) {
+    setTimeout(function markNewMessageAsExpired() {
       setMessages((prevMessages) => {
         const goodMessages = prevMessages.map((msg) => {
-          if (msg.id !== toastMessage.id) {
-            return msg;
+          if (msg.id === newToastMessage.id) {
+            return { ...msg, isExpired: true };
           }
 
-          return { ...msg, isExpired: true };
+          return msg;
         });
         return goodMessages;
       });
-    }, toastMessage.expiresIn);
-    setTimeout(() => {
+    }, newToastMessage.expiresIn);
+
+    setTimeout(function closeTostIfHasNothingToShow() {
       setMessages((prevMessages) => {
         const goodMessages = prevMessages.filter((msg) => {
-          return msg.id !== toastMessage.id;
+          return msg.id !== newToastMessage.id;
         });
 
         if (!goodMessages.length) {
@@ -34,20 +35,22 @@ export function useToast() {
 
         return goodMessages;
       });
-    }, toastMessage.expiresIn + TOAST_ANIM_DURATION);
+    }, newToastMessage.expiresIn + TOAST_ANIM_DURATION);
   }
 
   function push(message: ReactNode) {
-    const toastMessage = new ToastMessage(message);
+    const newToastMessage = new ToastMessage(message);
 
     setMessages((prevMessages) => {
-      if (prevMessages.find((prevToast) => prevToast.id === toastMessage.id)) {
+      if (
+        prevMessages.find((prevToast) => prevToast.id === newToastMessage.id)
+      ) {
         return prevMessages;
       }
-      return [...prevMessages, toastMessage];
+      return [...prevMessages, newToastMessage];
     });
 
-    setMessageExpirationTimer(toastMessage);
+    setMessageExpirationTimer(newToastMessage);
     setIsOpen(true);
   }
 
