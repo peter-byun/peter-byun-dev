@@ -1,3 +1,5 @@
+'use client';
+
 import { HTMLAttributes, ReactNode, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';

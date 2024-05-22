@@ -1,3 +1,5 @@
+'use client';
+
 import { css, SerializedStyles } from '@emotion/react';
 import { textInput } from '../../styles/mixins';
 import { BaseComponentProps } from '../../types/component-types';
