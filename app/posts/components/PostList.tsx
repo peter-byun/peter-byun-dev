@@ -26,10 +26,18 @@ export function PostList({ posts }: PostListProps) {
   }, []);
 
   const postsToShow = useMemo(() => {
-    return posts.filter((post) =>
-      post.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
-    );
+    if (searchText) {
+      return posts.filter((post) =>
+        post.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
+      );
+    }
+
+    return posts;
   }, [posts, searchText]);
+
+  console.log({
+    postsToShow,
+  });
 
   return (
     <section css={postsRootStyle}>

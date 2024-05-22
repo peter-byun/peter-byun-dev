@@ -1,11 +1,12 @@
+'use client';
 import type { Metadata } from 'next';
 import { RootHead } from './layout/RootHead';
 import { RootBody } from './layout/RootBody';
 
-export const metadata: Metadata = {
-  title: 'Blog Home',
-  description: "Peter Byun's Software Engineering Blog",
-};
+// export const metadata: Metadata = {
+//   title: 'Blog Home',
+//   description: "Peter Byun's Software Engineering Blog",
+// };
 
 export default function RootLayout({
   children,
@@ -16,7 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <RootHead />
       <body>
-        <RootBody>{children}</RootBody>
+        {/* <RootBody>{children}</RootBody> */}
+        {children}
       </body>
     </html>
   );

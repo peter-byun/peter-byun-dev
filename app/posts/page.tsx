@@ -1,3 +1,5 @@
+'use client';
+
 import { getPosts } from '../../fetch/blog-apis';
 
 import { fetchPosts } from '../../client-data/posts/fetchPosts';

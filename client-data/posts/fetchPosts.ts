@@ -1,7 +1,10 @@
+'use server';
+
 import { Prisma } from '@prisma/client';
-import { NotionService } from '../../backend/services/notion.service';
-import { PostService } from '../../backend/services/post.service';
+
 import { isDev } from '../../utils/environment-checker';
+import { NotionService } from '../../backend/server-actions/notion.service';
+import { PostService } from '../../backend/server-actions/post.service';
 
 export async function fetchPosts() {
   if (isDev()) {

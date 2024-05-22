@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  experimental: {
-    nextScriptWorkers: true,
+  compiler: {
+    emotion: true,
   },
 };
 
