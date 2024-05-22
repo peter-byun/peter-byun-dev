@@ -1,4 +1,4 @@
-import { PostService } from '../../../backend/services/post.service';
+import { PostService } from '../../../backend/server-actions/post.service';
 
 export default async function GET() {
   const postService = new PostService();

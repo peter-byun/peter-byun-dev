@@ -1,7 +1,7 @@
 import { string } from 'zod';
-import { CommentService } from '../../../../../backend/services/comment.service';
 
 import { getAllowAllOriginHeaders } from '../../../../../backend/controllers/allowAllOrigins';
+import { CommentService } from '../../../../../backend/server-actions/comment.service';
 
 export async function GET(request: Request) {
   const commentService = new CommentService();

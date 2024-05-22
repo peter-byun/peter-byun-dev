@@ -1,6 +1,6 @@
-import { PostService } from '../../../../backend/services/post.service';
 import { string } from 'zod';
 import { getAllowAllOriginHeaders } from '../../../../backend/controllers/allowAllOrigins';
+import { PostService } from '../../../../backend/server-actions/post.service';
 
 export default async function GET(request: Request) {
   const postService = new PostService();

@@ -1,4 +1,4 @@
-import { CommentService } from '../../../backend/services/comment.service';
+import { CommentService } from '../../../backend/server-actions/comment.service';
 
 export async function POST(request: Request) {
   const requestBody = await request.json();

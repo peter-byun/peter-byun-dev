@@ -1,5 +1,5 @@
 import { string } from 'zod';
-import { CommentService } from '../../../../../backend/services/comment.service';
+import { CommentService } from '../../../../../backend/server-actions/comment.service';
 
 export async function PATCH(request: Request) {
   const { searchParams } = new URL(request.url);
