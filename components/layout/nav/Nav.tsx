@@ -6,7 +6,7 @@ import { HTMLAttributes, ReactNode, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-import { Button } from '../../../components/base/button/Button';
+import { Button } from '../../base/button/Button';
 import { IconArticle } from './icons/IconArticle';
 import { IconContact } from './icons/IconContact';
 

@@ -16,9 +16,21 @@
 body {
   color: white;
   background-color: var(--bg-color-1);
-  padding: 0;
+  padding: 0 1rem;
   margin: 0;
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  :has(.post-root) {
+    padding: 0;
+    svg#blog-logo {
+      margin-left: 1rem;
+    }
+  }
+
   font-family:
     GmarketSansMedium,
     -apple-system,
@@ -32,22 +44,6 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-
-  #__next {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    height: 100%;
-
-    padding: 0 1rem;
-    :has(.post-root) {
-      padding: 0;
-      svg#blog-logo {
-        margin-left: 1rem;
-      }
-    }
-  }
 }
 
 main {

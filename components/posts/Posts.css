@@ -23,6 +23,7 @@
   max-width: 45rem;
   padding: 0;
   border: none;
+  border-radius: 6px;
   margin-bottom: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;

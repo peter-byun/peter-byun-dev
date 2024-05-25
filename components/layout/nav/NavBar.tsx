@@ -7,7 +7,7 @@ import { Logo } from './Logo';
 import { useRecoilState } from 'recoil';
 import { headerState } from '../../../states/global/header-state';
 import { useRouteChange } from '../../../utility-hooks/use-route-change';
-import { Button } from '../../../components/base/button/Button';
+import { Button } from '../../base/button/Button';
 import Nav from './Nav';
 import { useRouter } from 'next/navigation';
 
