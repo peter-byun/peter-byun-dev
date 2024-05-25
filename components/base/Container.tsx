@@ -4,20 +4,18 @@ import { forwardRef } from 'react';
 import { BaseComponentProps } from '../../types/component-types';
 import { DivAttributes } from '../../types/dom-types';
 import './Container.css';
+import clsx from 'clsx';
 
 type ContainerProps = BaseComponentProps<DivAttributes> & {
   level: 1 | 2 | 3;
 };
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  ({ level = 1, ...props }, ref) => {
+  ({ level = 1, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className="container"
-        style={{
-          backgroundColor: getContainerColor(level),
-        }}
+        className={clsx('container', className, getContainerColor(level))}
         {...props}
       >
         {props.children}
@@ -33,5 +31,5 @@ const CONTAINER_COLORS = {
 } as const;
 
 export function getContainerColor(level: keyof typeof CONTAINER_COLORS) {
-  return `var(--${CONTAINER_COLORS[level]})`;
+  return CONTAINER_COLORS[level];
 }

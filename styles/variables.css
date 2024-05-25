@@ -29,3 +29,13 @@
 
   --heart-red: #f52133f0;
 }
+
+.bg-color-1 {
+  background-color: var(--bg-color-1);
+}
+.bg-color-2 {
+  background-color: var(--bg-color-2);
+}
+.bg-color-3 {
+  background-color: var(--bg-color-3);
+}

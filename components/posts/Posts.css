@@ -16,6 +16,15 @@
   }
 }
 
+.post-item-link {
+  outline: none;
+}
+.post-item-link:hover button.post-item,
+.post-item-link:active button.post-item,
+.post-item-link:focus button.post-item {
+  background-color: var(--bg-color-4);
+}
+
 .post-item {
   appearance: none;
   color: var(--text-active);
@@ -27,13 +36,9 @@
   margin-bottom: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  :hover,
-  :active,
-  a:focus & {
-    background-color: var(--bg-color-4);
-  }
+
   h3 {
-    margin: 1.2rem;
+    margin: 0;
   }
 }
 

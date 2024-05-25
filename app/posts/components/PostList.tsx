@@ -3,6 +3,7 @@
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
 import '../../../components/posts/Posts.css';
+
 import { Input } from '../../../components/base/Input';
 
 import { Post } from '../../../fetch/blog-apis-types';
