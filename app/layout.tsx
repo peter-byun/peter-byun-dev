@@ -1,15 +1,11 @@
 'use client';
+
 import '../styles/variables.css';
 import '../styles/mixins.css';
 
-import type { Metadata } from 'next';
 import { RootHead } from './layout/RootHead';
 import { RootBody } from './layout/RootBody';
-
-// export const metadata: Metadata = {
-//   title: 'Blog Home',
-//   description: "Peter Byun's Software Engineering Blog",
-// };
+import { ConfigProvider } from './layout/ConfigProvider';
 
 export default function RootLayout({
   children,
@@ -18,10 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <RootHead /> */}
+      <RootHead />
       <body>
-        {/* <RootBody>{children}</RootBody> */}
-        {children}
+        <ConfigProvider>
+          <RootBody>{children}</RootBody>
+        </ConfigProvider>
       </body>
     </html>
   );

@@ -42,7 +42,7 @@ export function PostList({ posts }: PostListProps) {
       {postsToShow.length ? (
         <>
           {postsToShow.map((post) => {
-            return <PostLink post={post} />;
+            return <PostLink post={post} key={post.id} />;
           })}
         </>
       ) : (

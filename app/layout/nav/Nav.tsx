@@ -3,7 +3,7 @@
 import './NavBar.css';
 
 import { HTMLAttributes, ReactNode, useMemo } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 import { Button } from '../../../components/base/button/Button';
@@ -53,9 +53,9 @@ const getIsLinkActiveWithRouterPathName =
   };
 
 const Nav = (props: HTMLAttributes<HTMLDivElement>) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
-  const getIsLinkActive = getIsLinkActiveWithRouterPathName(router.pathname);
+  const getIsLinkActive = getIsLinkActiveWithRouterPathName(pathname);
   const isPostsActive = useMemo(() => {
     return getIsLinkActive(ROUTES.posts) || getIsLinkActive(ROUTES.home);
   }, [getIsLinkActive]);

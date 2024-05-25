@@ -6,10 +6,10 @@ import { ReactNode, useCallback, useMemo } from 'react';
 import { Logo } from './Logo';
 import { useRecoilState } from 'recoil';
 import { headerState } from '../../../states/global/header-state';
-import { useRouter } from 'next/router';
 import { useRouteChange } from '../../../utility-hooks/use-route-change';
 import { Button } from '../../../components/base/button/Button';
 import Nav from './Nav';
+import { useRouter } from 'next/navigation';
 
 export function NavBar({ children }: { children: ReactNode }) {
   const currentYear = useMemo(() => new Date().getFullYear(), []);

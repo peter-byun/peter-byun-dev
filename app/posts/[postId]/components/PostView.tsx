@@ -5,7 +5,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 hljs.registerLanguage('typescript', typescript);
 import 'highlight.js/styles/github-dark.css';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Comment as CommentData } from '../../../../fetch/blog-apis-types';
 
 import { Post as PostData } from '../../../../fetch/blog-apis-types';
@@ -102,7 +102,7 @@ export default function PostView({ post }: { post: PostData }) {
             className="post-content"
           ></section>
 
-          <aside className="post-aside-left">
+          <section className="post-aside-left">
             <div className="like-button-wrapper">
               <Button
                 onClick={throttledHandleLikeClick}
@@ -141,7 +141,7 @@ export default function PostView({ post }: { post: PostData }) {
             >
               🔗 Share
             </Button>
-          </aside>
+          </section>
 
           <Hr margin="50px 0px" />
 

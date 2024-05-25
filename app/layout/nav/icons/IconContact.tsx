@@ -1,14 +1,12 @@
 import { IconProps } from './icon-type';
 
 export function IconContact({ outlined, size, title }: IconProps) {
-  const sizeInPx = `${size}px`;
-
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height={sizeInPx}
+      height={size}
       viewBox="0 -960 960 960"
-      width={sizeInPx}
+      width={size}
       fill="#e8eaed"
       aria-label={title}
     >

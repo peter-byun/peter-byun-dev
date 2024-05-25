@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export const useRouteChange = ({
   onRouteChange,
 }: {
   onRouteChange: () => void;
 }) => {
-  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(
     function handleRouteChange() {
@@ -14,6 +15,6 @@ export const useRouteChange = ({
         onRouteChange();
       };
     },
-    [router.pathname, router.query]
+    [pathname, searchParams]
   );
 };
