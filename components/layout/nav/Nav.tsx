@@ -1,6 +1,6 @@
 'use client';
 
-import './NavBar.css';
+import './Nav.css';
 
 import { HTMLAttributes, ReactNode, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
@@ -83,7 +83,7 @@ const Nav = (props: HTMLAttributes<HTMLDivElement>) => {
           <IconContact outlined={false} size={'2rem'} title="About" />
         }
         IconInactive={
-          <IconContact outlined={false} size={'2rem'} title="About" />
+          <IconContact outlined={true} size={'2rem'} title="About" />
         }
       />
     </nav>
