@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { ToastMessage } from './ToastMessage';
-import { TOAST_ANIM_DURATION } from './Toast.style';
+import { TOAST_ANIM_DURATION } from './Toast';
 
 export function useToast() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

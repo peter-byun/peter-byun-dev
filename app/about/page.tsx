@@ -1,17 +1,15 @@
 import { Container } from '../../components/base/Container';
 import { A } from '../../components/base/A';
-import { pageRoot } from '../../styles/mixins';
-import { css } from '@emotion/react';
 
 export default function About() {
   return (
-    <section css={pageRoot}>
+    <section className="page-root">
       <Container
         level={2}
-        css={css`
-          top: 25%;
-          position: absolute;
-        `}
+        style={{
+          top: '25%',
+          position: 'absolute',
+        }}
       >
         Hello! I'm Peter.
         <br /> <br />

@@ -1,10 +1,24 @@
-import { css, keyframes } from '@emotion/react';
+.toast {
+  @keyframes open {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 
-export type ModalProps = {
-  open: boolean;
-};
+  @keyframes close {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
 
-export const dialogStyle = css`
+.dialog {
   display: block;
   background: transparent;
 
@@ -17,8 +31,9 @@ export const dialogStyle = css`
   height: 100vh;
 
   pointer-events: none;
-`;
-export const contentLayoutStyle = css`
+}
+
+.content-layout {
   background-color: transparent;
 
   position: fixed;
@@ -39,9 +54,9 @@ export const contentLayoutStyle = css`
   p + p {
     margin-top: 5px;
   }
-`;
+}
 
-export const contentStyle = css`
+.toast-content {
   background-color: #eaeaea;
 
   display: flex;
@@ -56,31 +71,4 @@ export const contentStyle = css`
   border-radius: 50px;
 
   opacity: 1;
-`;
-
-export const TOAST_ANIM_DURATION = 300;
-const toastAnimDurationInSec = TOAST_ANIM_DURATION * 0.001;
-
-export const contentAnimation = (isOpen: boolean) => {
-  return css`
-    animation: ${isOpen ? openAnim : closeAnim} ${toastAnimDurationInSec}s
-      ease-in;
-  `;
-};
-
-const openAnim = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-const closeAnim = keyframes`
-   from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
+}

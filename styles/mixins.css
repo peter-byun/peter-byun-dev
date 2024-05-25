@@ -1,0 +1,40 @@
+.index-content-width {
+  width: 45rem;
+  max-width: 100%;
+}
+
+.page-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.page-root > * {
+  width: 45rem;
+  max-width: 100%;
+}
+
+.text-input {
+  background-color: var(--text-secondary);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.text-input:focus {
+  outline: none;
+  box-shadow: var(--primary-color-2-active) 0px 0px 8px 2px;
+  -webkit-appearance: none;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

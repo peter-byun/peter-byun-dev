@@ -1,32 +1,19 @@
 'use client';
 
-import { css, SerializedStyles } from '@emotion/react';
-import { textInput } from '../../styles/mixins';
+import './Input.css';
+
 import { BaseComponentProps } from '../../types/component-types';
 import { InputAttributes } from '../../types/dom-types';
 import { forwardRef } from 'react';
 
-const inputRootCss = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-`;
-const inputCss = css`
-  ${textInput}
-`;
-
-interface InputProps extends BaseComponentProps<InputAttributes> {
-  customCss?: SerializedStyles;
-  customInputCss?: SerializedStyles;
-}
+type InputProps = BaseComponentProps<InputAttributes>;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, children, customCss, customInputCss, ...props }, ref) => {
+  ({ id, children, ...props }, ref) => {
     return (
-      <span css={[inputRootCss, customCss]}>
+      <span className="input-root">
         <label htmlFor={id}>{children}</label>
-        <input {...props} id={id} css={[inputCss, customInputCss]} ref={ref} />
+        <input {...props} id={id} className="input text-input" ref={ref} />
       </span>
     );
   }

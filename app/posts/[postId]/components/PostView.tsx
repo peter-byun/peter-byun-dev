@@ -17,13 +17,7 @@ import { useToast } from '../../../../components/base/toast/useToast';
 import { useThrottle } from '../../../../utility-hooks/use-throttle';
 import { copyToClipboard } from '../../../../utils/copy-to-clipboard';
 import { Button } from '../../../../components/base/button/Button';
-import { css, keyframes } from '@emotion/react';
 import { HeartSvg } from '../../../../components/posts/HeartSvg';
-import {
-  primaryColor2Inactive,
-  textActive,
-  textSecondary,
-} from '../../../../styles/variables';
 import { Hr } from '../../../../components/base/Hr';
 import { CommentsSection } from '../../../../components/posts/CommentsSection';
 import { LoadingSpinner } from '../../../../components/global/LoadingSpinner';
@@ -100,7 +94,7 @@ export default function PostView({ post }: { post: PostData }) {
   };
 
   return (
-    <section className="post-root" css={postRootStyle}>
+    <section className="post-root page-root post-view-root">
       {post?.content ? (
         <article className="post">
           <section
@@ -113,31 +107,24 @@ export default function PostView({ post }: { post: PostData }) {
               <Button
                 onClick={throttledHandleLikeClick}
                 custom
-                css={[
-                  css`
-                    padding: 7px 0px;
-                  `,
-                  isLikeAnimationOn
-                    ? css`
-                        animation: ${animationLike} 0.7s;
-                      `
-                    : undefined,
-                ]}
+                style={{
+                  padding: '7px 0px',
+                  animation: isLikeAnimationOn ? 'like-anim 0.7s' : undefined,
+                }}
               >
                 <HeartSvg
-                  css={
-                    isLikeAnimationOn &&
-                    css`
-                      animation: ${animationGradient} 0.7s;
-                    `
-                  }
+                  style={{
+                    animation: isLikeAnimationOn
+                      ? 'gradient-anim 0.7s'
+                      : undefined,
+                  }}
                 ></HeartSvg>
               </Button>
               <div
-                css={css`
-                  color: ${textSecondary};
-                  line-height: 1rem;
-                `}
+                style={{
+                  color: 'var(--text-secondary)',
+                  lineHeight: '1rem',
+                }}
               >
                 {postLikes}
               </div>
@@ -145,11 +132,11 @@ export default function PostView({ post }: { post: PostData }) {
 
             <Button
               onClick={handleShareClick}
-              css={css`
-                color: ${textActive};
-                width: fit-content;
-                margin: 25px 0 0 0;
-              `}
+              style={{
+                color: 'var(--text-active)',
+                width: 'fit-content',
+                margin: '25px 0 0 0',
+              }}
               custom
             >
               🔗 Share
@@ -181,116 +168,3 @@ class InnerHtmlHolder {
     this.__html = __html;
   }
 }
-
-export const postRootStyle = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 80vh;
-
-  & > * {
-    width: 45rem;
-    max-width: 100%;
-  }
-
-  .post {
-    background-color: #212121;
-    max-width: 100%;
-    border-radius: 6px;
-    padding: 1rem;
-
-    .post-title {
-      width: 100%;
-      text-align: left;
-    }
-    .post-content {
-      width: 100%;
-      text-align: left;
-
-      line-height: 2rem;
-    }
-
-    pre {
-      code {
-        line-height: 1rem;
-        span {
-          white-space: pre-line;
-        }
-      }
-    }
-
-    figure {
-      img {
-        width: 100%;
-      }
-    }
-
-    code {
-      border-radius: 10px;
-    }
-
-    .post-aside-left {
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .like-button-wrapper {
-        text-align: center;
-        color: ${primaryColor2Inactive};
-        font-size: 1.2rem;
-
-        svg {
-          width: 2.5rem;
-          height: 2.5rem;
-        }
-      }
-
-      @media screen and (min-width: 960px) {
-        position: fixed;
-        left: 5%;
-        top: 30vh;
-      }
-    }
-
-    .post-aside-right {
-      right: 5%;
-      top: 30vh;
-    }
-
-    .post-comment-section {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      width: 100%;
-    }
-  }
-`;
-
-const animationGradient = keyframes`
-  from, to {
-    fill: #f52133f0;
-  }
-  50% {
-    fill: #fc3d4def;
-  }
-`;
-const animationLike = keyframes`
-  from, to {
-    transform: scale
-    (1);
-  }
-  20% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1);
-  }
-  80% {
-    transform: scale(1.2);
-  }
-`;

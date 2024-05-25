@@ -3,8 +3,7 @@
 import { forwardRef } from 'react';
 import { BaseComponentProps } from '../../types/component-types';
 import { DivAttributes } from '../../types/dom-types';
-import { css } from '@emotion/react';
-import { bgColor1, bgColor2, bgColor3 } from '../../styles/variables';
+import './Container.css';
 
 type ContainerProps = BaseComponentProps<DivAttributes> & {
   level: 1 | 2 | 3;
@@ -15,12 +14,10 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
     return (
       <div
         ref={ref}
-        css={[
-          containerCss,
-          css`
-            background-color: ${CONTAINER_COLORS[level]};
-          `,
-        ]}
+        className="container"
+        style={{
+          backgroundColor: getContainerColor(level),
+        }}
         {...props}
       >
         {props.children}
@@ -29,17 +26,12 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
   }
 );
 
-const containerCss = css`
-  padding: 1rem;
-
-  border: none;
-  border-radius: 6px;
-
-  cursor: pointer;
-`;
-
 const CONTAINER_COLORS = {
-  1: bgColor1,
-  2: bgColor2,
-  3: bgColor3,
+  1: 'bg-color-1',
+  2: 'bg-color-2',
+  3: 'bg-color-3',
 } as const;
+
+export function getContainerColor(level: keyof typeof CONTAINER_COLORS) {
+  return `var(--${CONTAINER_COLORS[level]})`;
+}

@@ -1,5 +1,3 @@
-'use server';
-
 import { Prisma } from '@prisma/client';
 
 import { isDev } from '../../utils/environment-checker';

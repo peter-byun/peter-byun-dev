@@ -1,9 +1,11 @@
 'use client';
 
+import './Button.css';
+import { clsx } from 'clsx';
+
 import { KeyboardEventHandler, MouseEvent, useCallback } from 'react';
 import { BaseComponentProps } from '../../../types/component-types';
 import { ButtonAttributes } from '../../../types/dom-types';
-import { buttonStyle } from './Button.style';
 import { ButtonLoadingSpinner } from './ButtonLoadingSpinner';
 
 type ButtonProps = BaseComponentProps<ButtonAttributes> & {
@@ -47,8 +49,7 @@ export const Button = ({
 
   return (
     <button
-      className={className}
-      css={buttonStyle}
+      className={clsx(className, 'button-root')}
       onClick={onClick}
       onKeyUp={handleKeyUp}
       {...props}

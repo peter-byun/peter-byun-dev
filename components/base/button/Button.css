@@ -1,0 +1,81 @@
+.button-root {
+  cursor: pointer;
+  transition: background-color 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  .button-base {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--primary-color-2-inactive);
+    color: var(--text-secondary);
+
+    width: 100%;
+    padding: 1rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1.2rem;
+
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      box-shadow 0.2s;
+
+    :hover,
+    :focus {
+      background-color: var(--primary-color-2-active);
+      color: var(--text-active);
+      box-shadow: 0px 0px 8px 1px var(--primary-color-2-active);
+    }
+  }
+
+  .button-custom {
+    background-color: transparent;
+    border: none;
+  }
+
+  .button-loading {
+  }
+}
+
+.button-spinner {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+  width: 18px;
+  height: 18px;
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  svg circle {
+    fill: none;
+    stroke: #edf7ff;
+    stroke-width: 10;
+    /* A stroke pattern of this stroke-dasharray: [... sssssss] */
+    /* .: Dots */
+    /* s: Spaces */
+    stroke-dasharray: 0.25 0.75;
+    stroke-linecap: round;
+    /* NOTE: By changing the start point of the stroke pattern, */
+    /* you get stroke tail removing animation, which would look like gradually */
+    /* removing the stroke part(0.25, in our case) of the pattern. */
+    /* When combined with a rotation animation, */
+    /* it looks like it is a line circling with a trail. */
+    stroke-dashoffset: 1;
+    animation: dash-trail 1.5s ease-in-out infinite;
+  }
+
+  @keyframes dash-trail {
+    0% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -1;
+    }
+  }
+}

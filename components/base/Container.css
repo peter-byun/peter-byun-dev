@@ -1,0 +1,8 @@
+.container {
+  padding: 1rem;
+
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+}

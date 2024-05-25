@@ -1,4 +1,7 @@
 'use client';
+import '../styles/variables.css';
+import '../styles/mixins.css';
+
 import type { Metadata } from 'next';
 import { RootHead } from './layout/RootHead';
 import { RootBody } from './layout/RootBody';
@@ -15,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <RootHead />
+      {/* <RootHead /> */}
       <body>
         {/* <RootBody>{children}</RootBody> */}
         {children}

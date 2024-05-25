@@ -2,15 +2,9 @@
 
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
-import { css } from '@emotion/react';
+import './PostList.css';
 import { Input } from '../../../components/base/Input';
 
-import {
-  postsNotFoundStyle,
-  postsRootStyle,
-  searchBoxStyle,
-  searchBoxInputStyle,
-} from '../../../components/posts/Posts.style';
 import { Post } from '../../../fetch/blog-apis-types';
 import PostLink from './PostLink';
 
@@ -35,22 +29,12 @@ export function PostList({ posts }: PostListProps) {
     return posts;
   }, [posts, searchText]);
 
-  console.log({
-    postsToShow,
-  });
-
   return (
-    <section css={postsRootStyle}>
-      <section
-        css={css`
-          position: sticky;
-          top: 0px;
-        `}
-      >
+    <section className="post-root page-root">
+      <section className="search-box">
         <Input
           placeholder="🔍 Search posts"
-          customCss={searchBoxStyle}
-          customInputCss={searchBoxInputStyle}
+          className="search-box-input"
           onChange={handleSearchKeyUp}
         />
       </section>
@@ -62,7 +46,7 @@ export function PostList({ posts }: PostListProps) {
           })}
         </>
       ) : (
-        <p css={postsNotFoundStyle}>Found Nothing 🥲</p>
+        <p className="posts-not-found">Found Nothing 🥲</p>
       )}
     </section>
   );

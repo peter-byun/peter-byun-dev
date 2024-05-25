@@ -9,5 +9,3 @@
    - queryOptions
    - Optimistic updates
      - useOptimistic
-   - Replace SCSS with Emotion
-   - clean up css props with utility css(emotion)

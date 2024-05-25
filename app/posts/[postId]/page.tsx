@@ -3,7 +3,7 @@ import { getPosts } from '../../../fetch/blog-apis';
 import PostView from './components/PostView';
 
 export async function generateStaticParams() {
-  const posts = (await getPosts()) ?? [];
+  const posts = [];
 
   return posts.map((post) => {
     return {
@@ -36,8 +36,8 @@ export default async function Post({
 }: {
   params: PostPageStaticParam;
 }) {
-  const postId = params.postId;
-  const post = await getPost(postId);
+  // const postId = params.postId;
+  // const post = await getPost(postId);
 
-  return <PostView post={post} />;
+  return null;
 }

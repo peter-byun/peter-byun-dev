@@ -1,5 +1,6 @@
+import './CommentSEction.css';
+
 import { useCallback, useEffect, useState } from 'react';
-import { css } from '@emotion/react';
 import { z } from 'zod';
 
 import { Button } from '../base/button/Button';
@@ -13,13 +14,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { InputError } from '../base/InputError';
 import { useThrottle } from '../../utility-hooks/use-throttle';
 import { H } from '../base/H';
-import {
-  commentBottomCss,
-  commentContainerCss,
-  commentWriterCss,
-  commentWriterId,
-  commentWriterNameCss,
-} from './CommentSection.style';
 import { Toast } from '../base/toast/Toast';
 import { useToast } from '../base/toast/useToast';
 
@@ -143,43 +137,20 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
   return (
     <section className="post-comment-section">
       <H level={3}>Comments</H>
-      <form onSubmit={handleSubmit(postComment)} css={commentWriterCss}>
-        <div css={commentWriterId}>
-          <div
-            css={css`
-              width: 30%;
-            `}
-          >
-            <Input
-              type="text"
-              id="comment-name"
-              {...register('name')}
-              customCss={css`
-                input {
-                  width: 100%;
-                }
-              `}
-            >
+      <form
+        onSubmit={handleSubmit(postComment)}
+        className="comment-writer flex-column-center"
+      >
+        <div className="comment-writer-id">
+          <div className="input-name">
+            <Input type="text" id="comment-name" {...register('name')}>
               Name
             </Input>
             <InputError>{errors.name?.message}</InputError>
           </div>
 
-          <div
-            css={css`
-              width: 50%;
-            `}
-          >
-            <Input
-              type="email"
-              id="comment-email"
-              {...register('email')}
-              customCss={css`
-                input {
-                  width: 100%;
-                }
-              `}
-            >
+          <div className="comment-email-wrapper">
+            <Input type="email" id="comment-email" {...register('email')}>
               Email (optional)
             </Input>
             <InputError>{errors.email}</InputError>
@@ -189,7 +160,7 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
         <div className="viewer-comment-editor">
           <label htmlFor="viewer-comment-editor-text-area">Content</label>
           <TextArea
-            id="viewer-comment-editor-text-area"
+            id="viewer-comment-editor-text-area text-input"
             {...register('content')}
           />
           <Button isLoading={postCommentMutation.isLoading}>Submit</Button>
@@ -200,22 +171,15 @@ export const CommentsSection = ({ postId, comments }: CommentsSectionProps) => {
 
       {commentsToShow &&
         commentsToShow.map((comment) => (
-          <article css={commentContainerCss} key={comment.id}>
-            <span css={commentWriterNameCss}>{comment.name}</span>
+          <article className="comment-container" key={comment.id}>
+            <span className="comment-writer-name">{comment.name}</span>
             <p>{comment.content}</p>
-            <div css={commentBottomCss}>
+            <div className="comment-box">
               <Button
                 onClick={() => {
                   throttledHandleCommentLikeClick(comment.id);
                 }}
                 custom
-                css={css`
-                  :hover,
-                  :focus,
-                  :active {
-                    filter: brightness(1.3);
-                  }
-                `}
               >
                 🤍
               </Button>

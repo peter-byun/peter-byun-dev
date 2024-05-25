@@ -1,14 +1,8 @@
 'use client';
 
+import './Toast.css';
+
 import { useEffect, useRef } from 'react';
-
-import {
-  contentLayoutStyle,
-  contentStyle,
-  contentAnimation,
-  dialogStyle,
-} from './Toast.style';
-
 import Portal from '../portal/Portal';
 import { ToastMessage } from './ToastMessage';
 
@@ -43,12 +37,15 @@ export const Toast = (props: ToastProps) => {
 
   return props.isOpen ? (
     <Portal selector="body">
-      <dialog css={dialogStyle} ref={toastRef}>
-        <article css={[contentLayoutStyle]}>
+      <dialog className="toast dialog" ref={toastRef}>
+        <article className="content-layout">
           {props.messages.map((message) => (
             <p
               key={message.createdAt}
-              css={[contentStyle, contentAnimation(!message.isExpired)]}
+              className="toast-content"
+              style={{
+                animation: createAnim(!message.isExpired),
+              }}
             >
               {message.content}
             </p>
@@ -58,3 +55,11 @@ export const Toast = (props: ToastProps) => {
     </Portal>
   ) : null;
 };
+
+export const TOAST_ANIM_DURATION = 300;
+function createAnim(isOpen: boolean) {
+  const toastAnimDurationInSec = TOAST_ANIM_DURATION * 0.001;
+
+  return `${isOpen ? 'open' : 'close'} ${toastAnimDurationInSec}s
+  ease-in;`;
+}

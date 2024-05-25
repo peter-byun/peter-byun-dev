@@ -1,0 +1,9 @@
+.a {
+  color: var(--primary-color-3-inactive);
+  text-decoration: none;
+  cursor: pointer;
+  :hover,
+  :active {
+    color: var(--primary-color-3-active);
+  }
+}

@@ -13,12 +13,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.550.0",
-    "@emotion-icons/material": "^3.14.0",
-    "@emotion-icons/material-outlined": "^3.14.0",
-    "@emotion-icons/material-rounded": "^3.14.0",
-    "@emotion/eslint-plugin": "^11.11.0",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
     "@hookform/resolvers": "^3.3.3",
     "@notion-stuff/blocks-html-parser": "^6.0.0",
     "@notionhq/client": "^1.0.4",
@@ -42,9 +36,10 @@
   },
   "devDependencies": {
     "@types/node": "17.0.21",
-    "@types/react": "17.0.39",
-    "@types/react-dom": "^18.2.24",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "clsx": "^2.1.1",
     "eslint": "8.9.0",
     "typescript": "5.3"
   },

@@ -1,0 +1,71 @@
+.post-comment-section {
+  .input-name {
+    width: 30%;
+  }
+
+  #comment-name {
+    input {
+      width: 100%;
+    }
+  }
+
+  .comment-email-wrapper {
+    width: 50%;
+  }
+
+  #comment-email {
+    input {
+      width: 100%;
+    }
+  }
+
+  .comment-container {
+    width: 100%;
+    padding: 1rem 0;
+
+    :not(:last-child) {
+      border-bottom: 1px solid gray;
+    }
+  }
+
+  .comment-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1rem;
+
+    button {
+      :hover,
+      :focus,
+      :active {
+        filter: brightness(1.3);
+      }
+    }
+  }
+
+  .comment-writer {
+    width: 100%;
+    gap: 1rem;
+
+    .viewer-comment-editor {
+      width: 100%;
+
+      .text-area {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  .comment-writer-id {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1rem;
+  }
+  .comment-writer-name {
+    color: gray;
+  }
+}
