@@ -8,6 +8,7 @@ import { RootHead } from '../layout/root-layout/RootHead';
 import { ConfigProvider } from '../layout/root-layout/ConfigProvider';
 import { HeaderContextProvider } from './states/global/header-state';
 import { NavBar } from '../layout/root-layout/nav/NavBar';
+import { Suspense } from 'react';
 
 export default function RootLayout({
   children,
@@ -20,7 +21,9 @@ export default function RootLayout({
         <RootHead />
         <body>
           <ConfigProvider>
-            <NavBar>{children}</NavBar>
+            <Suspense fallback={'loading'}>
+              <NavBar>{children}</NavBar>
+            </Suspense>
           </ConfigProvider>
         </body>
       </HeaderContextProvider>
