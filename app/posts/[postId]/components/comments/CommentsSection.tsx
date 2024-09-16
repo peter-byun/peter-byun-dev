@@ -1,6 +1,12 @@
 import './CommentsSection.module.scss';
 
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from 'react';
 import { z } from 'zod';
 
 import { Button } from '../../../../../ui/button/Button';
@@ -14,18 +20,19 @@ import { useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputError } from '../../../../../ui/InputError';
-import { useThrottle } from '../../../../../utils/hooks/use-throttle';
+import { useThrottle } from '../../../../../utils/hooks/useThrottle';
 import { H } from '../../../../../ui/H';
 import { Toast } from '../../../../../ui/toast/Toast';
 import { useToast } from '../../../../../ui/toast/useToast';
 
 import styles from './CommentsSection.module.scss';
+import { useRouter } from 'next/navigation';
 
 interface CommentsSectionProps {
   postId?: string | string[];
   comments?: CommentData[];
-  createComment: (commentInput: CommentCreateInput) => Promise<Comment>;
-  likeComment: (commentId: string) => Promise<Comment>;
+  createComment: (commentInput: CommentCreateInput) => Promise<CommentData>;
+  likeComment: (commentId: string) => Promise<CommentData>;
 }
 
 type CommentFormInputs = {
@@ -75,29 +82,36 @@ export const CommentsSection = ({
     e.preventDefault();
     return handleSubmit(postComment)(e);
   };
+
+  const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
+
   const postComment = useCallback(() => {
-    const postIdInNumber = Number(postId);
-    const parsedPostId = z.number().safeParse(postIdInNumber);
-    if (!parsedPostId.success) {
-      toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
-      return;
-    }
-
-    const commentPayload = {
-      postId: parsedPostId.data,
-      name: watch('name'),
-      email: watch('email') ?? '',
-      content: watch('content'),
-    };
-
-    createComment(commentPayload)
-      .then(() => {
-        queryClient.invalidateQueries('comments');
-      })
-      .catch(() => {
+    startTransition(async () => {
+      const postIdInNumber = Number(postId);
+      const parsedPostId = z.number().safeParse(postIdInNumber);
+      if (!parsedPostId.success) {
         toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
-      });
-    resetForm();
+        return;
+      }
+
+      const commentPayload = {
+        postId: parsedPostId.data,
+        name: watch('name'),
+        email: watch('email') ?? '',
+        content: watch('content'),
+      };
+
+      createComment(commentPayload)
+        .then(() => {
+          router.refresh();
+        })
+        .catch(() => {
+          toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
+        });
+      resetForm();
+    });
   }, [postId]);
 
   const setCommentLikes = useCallback(
@@ -155,7 +169,7 @@ export const CommentsSection = ({
             id="viewer-comment-editor-text-area"
             {...register('content')}
           />
-          <Button isLoading={false}>Submit</Button>
+          <Button isLoading={isPending}>Submit</Button>
         </div>
 
         <InputError>{errors.content?.message}</InputError>

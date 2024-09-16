@@ -5,7 +5,7 @@ import './NavBar.css';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { Logo } from './Logo';
 
-import { useRouteChange } from '../../../utils/hooks/use-route-change';
+import { useRouteChange } from '../../../utils/hooks/useRouteChange';
 import { Button } from '../../../ui/button/Button';
 import Nav from './Nav';
 import { useRouter } from 'next/navigation';

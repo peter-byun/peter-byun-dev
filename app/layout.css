@@ -22,7 +22,7 @@ body {
   background-color: var(--bg-color-1);
   padding: 0 1rem;
   margin: 0;
-  height: 100%;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;
@@ -78,4 +78,32 @@ h3 {
 
 dd {
   margin-left: 1rem;
+}
+
+/* Keyframes */
+
+@keyframes gradient-anim {
+  from,
+  to {
+    fill: #f52133f0;
+  }
+  50% {
+    fill: #fc3d4def;
+  }
+}
+
+@keyframes like-anim {
+  from,
+  to {
+    transform: scale (1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.2);
+  }
 }

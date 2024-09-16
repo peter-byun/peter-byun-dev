@@ -11,9 +11,9 @@ import {
   Comment as CommentData,
   Post as PostData,
 } from '../../../../../network/blog-apis-types';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useToast } from '../../../../../ui/toast/useToast';
-import { useThrottle } from '../../../../../utils/hooks/use-throttle';
+import { useThrottle } from '../../../../../utils/hooks/useThrottle';
 import { copyToClipboard } from '../../../../../utils/copy-to-clipboard';
 import { Button } from '../../../../../ui/button/Button';
 import { Hr } from '../../../../../ui/Hr';
@@ -24,7 +24,9 @@ import { Toast } from '../../../../../ui/toast/Toast';
 import styles from './PostView.module.scss';
 import clsx from 'clsx';
 import { useHeaderContext } from '../../../../states/global/header-state';
-import { HeartSvg } from './HeartSvg';
+import { HeartSvg } from './post-like-button/HeartSvg';
+import { useLikeAnim } from './post-like-button/useLikeAnim';
+import { useWebShare } from '../../../../../utils/hooks/useWebShare';
 
 export default function PostView(props: {
   post: PostData;
@@ -48,6 +50,7 @@ export default function PostView(props: {
     likePost(post.id).then(() => {
       toast.push('Thank you 🫶🏻');
       likeAnim.animate();
+      setPostLikes(postLikes + 1);
     });
   }, [post.id, setPostLikes]);
 
@@ -76,7 +79,7 @@ export default function PostView(props: {
           <section
             dangerouslySetInnerHTML={new InnerHtmlHolder(post.content)}
             className={styles.postContent}
-          ></section>
+          />
 
           <section className={styles.postAsideLeft}>
             <div className={styles.linkButtonWrapper}>
@@ -158,57 +161,4 @@ function useHeaderTitle({ title }: { title: string }) {
       title,
     });
   }, [title]);
-}
-
-function useLikeAnim() {
-  const [isLikeAnimationOn, setIsLikeAnimationOn] = useState<boolean>();
-
-  function animate() {
-    setIsLikeAnimationOn(true);
-    setTimeout(() => {
-      setIsLikeAnimationOn(false);
-    }, 800);
-  }
-
-  const elementStyles = useMemo(() => {
-    return {
-      buttonStyle: {
-        animation: isLikeAnimationOn ? 'like-anim 0.7s' : undefined,
-      },
-      heartStyle: {
-        animation: isLikeAnimationOn ? 'gradient-anim 0.7s' : undefined,
-      },
-    };
-  }, [isLikeAnimationOn]);
-
-  return {
-    animate,
-    isLikeAnimationOn,
-    elementStyles,
-  };
-}
-
-function useWebShare() {
-  async function share(shareData: ShareData) {
-    return new Promise((resolve, reject) => {
-      try {
-        if (!navigator.share && shareData.url) {
-          copyToClipboard(shareData.url);
-          resolve(true);
-
-          return;
-        }
-
-        navigator.share(shareData).then(() => {
-          resolve(true);
-        });
-      } catch (error: unknown) {
-        reject();
-      }
-    });
-  }
-
-  return {
-    share,
-  };
 }

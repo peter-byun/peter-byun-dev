@@ -2,7 +2,7 @@
 
 import '../styles/variables.css';
 import '../styles/mixins.css';
-import '../styles/global.css';
+import './layout.css';
 
 import { RootHead } from '../layout/root-layout/RootHead';
 import { ConfigProvider } from '../layout/root-layout/ConfigProvider';

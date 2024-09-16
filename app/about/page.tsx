@@ -6,19 +6,33 @@ import profilePic from './profile.jpg';
 
 export default function About() {
   return (
-    <section className="page-root">
-      <div>
+    <section
+      className="page-root"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 'calc(100vh - 10rem)',
+      }}
+    >
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          marginBottom: '1rem',
+        }}
+      >
         <Image
           src={profilePic.src}
           width={50}
           height={37.5}
           style={{
-            position: 'absolute',
-            top: '15%',
-            left: '50%',
             height: 'auto',
-            borderRadius: '23px',
-            transform: 'translateX(-50%)',
+            borderRadius: '100%',
+            border: '1.1px solid rgb(187 187 187 / 50%)',
           }}
           alt="profile picture"
         />
@@ -27,7 +41,6 @@ export default function About() {
         level={2}
         style={{
           top: '25%',
-          position: 'absolute',
           padding: '24px',
         }}
       >

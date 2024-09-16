@@ -1,4 +1,4 @@
-import { SvgAttributes } from '../../../../../utils/types/dom-types';
+import { SvgAttributes } from '../../../../../../utils/types/dom-types';
 
 type SvgProps = SvgAttributes;
 
