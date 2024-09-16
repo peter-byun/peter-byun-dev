@@ -1,7 +1,6 @@
-# What It Is
+# Peter Byun Dev
 
 This is the source code of [my blog](https://peter-byun.dev). <br />
-It is built with Next.js and Notion API, and deployed to Vercel. <br />
 
 ## Commands
 

@@ -2,9 +2,9 @@
 
 import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 
-import '../../../components/posts/Posts.css';
+import './PostList.css';
 
-import { Input } from '../../../components/base/Input';
+import { Input } from '../../../ui/Input';
 
 import { Post } from '../../../fetch/blog-apis-types';
 import PostLink from './PostLink';

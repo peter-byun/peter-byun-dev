@@ -4,9 +4,10 @@ import '../styles/variables.css';
 import '../styles/mixins.css';
 import '../styles/global.css';
 
-import { RootHead } from '../components/layout/RootHead';
-import { RootBody } from '../components/layout/RootBody';
-import { ConfigProvider } from '../components/layout/ConfigProvider';
+import { RootHead } from '../layout/global-layout/RootHead';
+import { ConfigProvider } from '../layout/global-layout/ConfigProvider';
+import { HeaderContextProvider } from '../states/global/header-state';
+import { NavBar } from '../layout/global-layout/nav/NavBar';
 
 export default function RootLayout({
   children,
@@ -15,12 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <RootHead />
-      <body>
-        <ConfigProvider>
-          <RootBody>{children}</RootBody>
-        </ConfigProvider>
-      </body>
+      <HeaderContextProvider>
+        <RootHead />
+        <body>
+          <ConfigProvider>
+            <NavBar>{children}</NavBar>
+          </ConfigProvider>
+        </body>
+      </HeaderContextProvider>
     </html>
   );
 }

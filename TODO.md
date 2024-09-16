@@ -4,8 +4,8 @@
      - useSuspenseQuery
    - Use server actions
      - Replace the routes with server actions
-2. Replace Recoil with Zustand
-3. Refactor service code
+2. Refactor service code
    - queryOptions
+   - cache invalidations
    - Optimistic updates
-     - useOptimistic
+     - useOptimistic, for comments.

@@ -1,23 +1,46 @@
-import { Container } from '../../components/base/Container';
-import { A } from '../../components/base/A';
+import { Container } from '../../ui/Container';
+import { A } from '../../ui/A';
+import Image from 'next/image';
+
+import profilePic from './profile.jpg';
 
 export default function About() {
   return (
     <section className="page-root">
+      <div>
+        <Image
+          src={profilePic.src}
+          width={50}
+          height={37.5}
+          style={{
+            position: 'absolute',
+            top: '15%',
+            left: '50%',
+            height: 'auto',
+            borderRadius: '23px',
+            transform: 'translateX(-50%)',
+          }}
+          alt="profile picture"
+        />
+      </div>
       <Container
         level={2}
         style={{
           top: '25%',
           position: 'absolute',
+          padding: '24px',
         }}
       >
-        Hello! I'm Peter.
+        Hi! I'm Peter.
         <br /> <br />
-        I'm a web developer, and my motto is to create an immersive web
-        experience.
+        I'm a web developer specializing in building frontend applications with
+        <strong>
+          {' '}
+          low-latency, high availability, fault tolerance, and observability.
+        </strong>
         <br /> <br />
-        I do whatever it takes to make a better website; this blog is where I
-        share things I learned from my experience.
+        And this is where I share my experiences of striving to build{' '}
+        <strong> better products.</strong>
         <br /> <br />
         If you want to talk to me for any reason, you can find me on{' '}
         <A href="https://www.linkedin.com/in/donghyeok-byun-0b719619a/">

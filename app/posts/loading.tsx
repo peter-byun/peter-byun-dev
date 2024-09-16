@@ -1,11 +1,7 @@
 'use client';
 
-import { LoadingSpinner } from '../../components/global/LoadingSpinner';
+import { LoadingScreen } from '../../ui/LoadingScreen';
 
 export default function Loading() {
-  return (
-    <div>
-      <LoadingSpinner size="sm" />
-    </div>
-  );
+  return <LoadingScreen />;
 }

@@ -46,7 +46,7 @@ export class PostService {
           where: { title: cur.title },
           update: {
             title: cur.title,
-            content: cur.content,
+            content: cur.content || '',
           },
           create: { title: cur.title, content: cur.content },
         })

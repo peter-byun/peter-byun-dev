@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { Post } from '../../../fetch/blog-apis-types';
-import { ContainerButton } from '../../../components/base/ContainerButton';
+import { ContainerButton } from '../../../ui/ContainerButton';
 
 interface PostLinkProps {
   post: Post;

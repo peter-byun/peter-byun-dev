@@ -1,6 +1,5 @@
 .index-content-width {
-  width: 45rem;
-  max-width: 100%;
+  width: 100%;
 }
 
 .page-root {
@@ -9,12 +8,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
 }
 
 .page-root > * {
-  width: 45rem;
-  max-width: 100%;
+  width: 100%;
 }
 
 .text-input {

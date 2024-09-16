@@ -14,7 +14,7 @@ export type Comment = {
   email: string;
   likes: number;
   postId: number;
-  parentCommentId?: number;
+  parentCommentId?: number | null;
 };
 
 export type CommentCreateInput = {
