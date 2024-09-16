@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "vercel:link": "vercel link",
+    "vercel:env-pull": "vercel env pull",
     "dev": "next dev",
     "build": "prisma generate && prisma migrate deploy update && next build",
     "start": "next start",
@@ -17,6 +19,8 @@
     "@notion-stuff/blocks-html-parser": "^6.0.0",
     "@notionhq/client": "^1.0.4",
     "@prisma/client": "^4.0.0",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "@vercel/analytics": "^1.1.1",
     "@vercel/postgres": "^0.5.1",
     "eslint-config-prettier": "^9.1.0",
@@ -31,9 +35,7 @@
     "react-query": "^3.39.1",
     "sharp": "^0.31.0",
     "wait-on": "^6.0.1",
-    "zod": "^3.22.4",
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "17.0.21",
@@ -41,7 +43,8 @@
     "clsx": "^2.1.1",
     "eslint": "8.9.0",
     "sass": "^1.78.0",
-    "typescript": "5.3"
+    "typescript": "5.3",
+    "vercel": "^37.4.2"
   },
   "overrides": {
     "@types/react": "npm:types-react@rc",

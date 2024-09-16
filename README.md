@@ -9,7 +9,9 @@ This is the source code of [my blog](https://peter-byun.dev). <br />
 You need to setup Vercel CLI first before loading environment variables from Vercel.
 
 ```
-vercel env pull
+pnpm install
+pnpm run vercel:link
+pnpm run vercel:env-pull
 ```
 
 ### Build

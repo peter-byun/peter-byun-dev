@@ -1,10 +1,17 @@
 import { Prisma } from '@prisma/client';
 import { NotionService } from '../../backend/server-actions/notion.service';
 import { PostService } from '../../backend/server-actions/post.service';
-import { getPosts } from '../../network/blog-apis';
 import { isDev } from '../../utils/environment-checker';
 
 import { PostList } from './components/PostList';
+
+const postService = new PostService();
+
+const getPosts = () => {
+  return postService.posts({
+    skip: 0,
+  });
+};
 
 async function fetchPosts() {
   if (isDev()) {

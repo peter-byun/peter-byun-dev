@@ -10,7 +10,7 @@ import {
   CommentCreateInput,
   Comment as CommentData,
   Post as PostData,
-} from '../../../../../network/blog-apis-types';
+} from '../../../../../backend/types/posts.type';
 import { useCallback, useEffect, useState } from 'react';
 import { useToast } from '../../../../../ui/toast/useToast';
 import { useThrottle } from '../../../../../utils/hooks/useThrottle';

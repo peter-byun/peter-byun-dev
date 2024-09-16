@@ -6,7 +6,7 @@ import './PostList.css';
 
 import { Input } from '../../../ui/Input';
 
-import { Post } from '../../../network/blog-apis-types';
+import { Post } from '../../../backend/types/posts.type';
 import PostLink from './PostLink';
 
 interface PostListProps {

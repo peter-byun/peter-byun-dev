@@ -5,11 +5,11 @@ import './NavBar.css';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { Logo } from './Logo';
 
-import { useRouteChange } from '../../../utils/hooks/useRouteChange';
-import { Button } from '../../../ui/button/Button';
+import { useRouteChange } from '../../../../utils/hooks/useRouteChange';
+import { Button } from '../../../../ui/button/Button';
 import Nav from './Nav';
 import { useRouter } from 'next/navigation';
-import { useHeaderContext } from '../../../app/states/global/header-state';
+import { useHeaderContext } from '../../../../app/states/global/header-state';
 
 export function NavBar({ children }: { children: ReactNode }) {
   const currentYear = useMemo(() => new Date().getFullYear(), []);

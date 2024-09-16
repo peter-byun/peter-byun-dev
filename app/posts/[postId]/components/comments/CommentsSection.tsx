@@ -15,7 +15,7 @@ import { TextArea } from '../../../../../ui/TextArea';
 import {
   CommentCreateInput,
   Comment as CommentData,
-} from '../../../../../network/blog-apis-types';
+} from '../../../../../backend/types/posts.type';
 import { useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

@@ -2,7 +2,7 @@ import { string } from 'zod';
 import { PostService } from '../../../backend/server-actions/post.service';
 import PostView from './components/post-view/PostView';
 import { CommentService } from '../../../backend/server-actions/comment.service';
-import { CommentCreateInput } from '../../../network/blog-apis-types';
+import { CommentCreateInput } from '../../../backend/types/posts.type';
 
 async function getPost(postId: string) {
   const postService = new PostService();
