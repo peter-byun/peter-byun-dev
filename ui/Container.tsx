@@ -1,8 +1,8 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { BaseComponentProps } from '../types/component-types';
-import { DivAttributes } from '../types/dom-types';
+import { BaseComponentProps } from '../utils/types/component-types';
+import { DivAttributes } from '../utils/types/dom-types';
 import './Container.css';
 import clsx from 'clsx';
 

@@ -2,8 +2,8 @@
 
 import './Input.css';
 
-import { BaseComponentProps } from '../types/component-types';
-import { InputAttributes } from '../types/dom-types';
+import { BaseComponentProps } from '../utils/types/component-types';
+import { InputAttributes } from '../utils/types/dom-types';
 import { forwardRef } from 'react';
 import clsx from 'clsx';
 

@@ -2,8 +2,8 @@
 import './Container.css';
 
 import { forwardRef } from 'react';
-import { BaseComponentProps } from '../types/component-types';
-import { ButtonAttributes } from '../types/dom-types';
+import { BaseComponentProps } from '../utils/types/component-types';
+import { ButtonAttributes } from '../utils/types/dom-types';
 import { getContainerColorWithLevel } from './Container';
 import clsx from 'clsx';
 

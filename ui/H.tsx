@@ -1,5 +1,5 @@
-import { BaseComponentProps } from '../types/component-types';
-import { HeadingAttributes } from '../types/dom-types';
+import { BaseComponentProps } from '../utils/types/component-types';
+import { HeadingAttributes } from '../utils/types/dom-types';
 
 type HeadingProps = BaseComponentProps<HeadingAttributes> & {
   level: number;

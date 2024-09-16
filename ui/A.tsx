@@ -1,5 +1,5 @@
-import { BaseComponentProps } from '../types/component-types';
-import { AnchorAttributes } from '../types/dom-types';
+import { BaseComponentProps } from '../utils/types/component-types';
+import { AnchorAttributes } from '../utils/types/dom-types';
 
 type AnchorProps = BaseComponentProps<AnchorAttributes>;
 

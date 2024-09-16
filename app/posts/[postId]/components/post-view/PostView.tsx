@@ -10,10 +10,10 @@ import {
   CommentCreateInput,
   Comment as CommentData,
   Post as PostData,
-} from '../../../../../fetch/blog-apis-types';
+} from '../../../../../network/blog-apis-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useToast } from '../../../../../ui/toast/useToast';
-import { useThrottle } from '../../../../../utility-hooks/use-throttle';
+import { useThrottle } from '../../../../../utils/hooks/use-throttle';
 import { copyToClipboard } from '../../../../../utils/copy-to-clipboard';
 import { Button } from '../../../../../ui/button/Button';
 import { Hr } from '../../../../../ui/Hr';
@@ -23,7 +23,7 @@ import { Toast } from '../../../../../ui/toast/Toast';
 
 import styles from './PostView.module.scss';
 import clsx from 'clsx';
-import { useHeaderContext } from '../../../../../states/global/header-state';
+import { useHeaderContext } from '../../../../states/global/header-state';
 import { HeartSvg } from './HeartSvg';
 
 export default function PostView(props: {

@@ -4,8 +4,8 @@ import './Button.css';
 import { clsx } from 'clsx';
 
 import { KeyboardEventHandler, MouseEvent, useCallback } from 'react';
-import { BaseComponentProps } from '../../types/component-types';
-import { ButtonAttributes } from '../../types/dom-types';
+import { BaseComponentProps } from '../../utils/types/component-types';
+import { ButtonAttributes } from '../../utils/types/dom-types';
 import { ButtonLoadingSpinner } from './ButtonLoadingSpinner';
 
 type ButtonProps = BaseComponentProps<ButtonAttributes> & {

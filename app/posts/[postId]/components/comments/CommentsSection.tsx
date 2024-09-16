@@ -9,12 +9,12 @@ import { TextArea } from '../../../../../ui/TextArea';
 import {
   CommentCreateInput,
   Comment as CommentData,
-} from '../../../../../fetch/blog-apis-types';
+} from '../../../../../network/blog-apis-types';
 import { useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputError } from '../../../../../ui/InputError';
-import { useThrottle } from '../../../../../utility-hooks/use-throttle';
+import { useThrottle } from '../../../../../utils/hooks/use-throttle';
 import { H } from '../../../../../ui/H';
 import { Toast } from '../../../../../ui/toast/Toast';
 import { useToast } from '../../../../../ui/toast/useToast';
