@@ -80,6 +80,10 @@ dd {
   margin-left: 1rem;
 }
 
+code {
+  background-color: #303030;
+}
+
 /* Keyframes */
 
 @keyframes gradient-anim {
