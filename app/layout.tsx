@@ -9,6 +9,7 @@ import { ConfigProvider } from './layout/root-layout/ConfigProvider';
 import { HeaderContextProvider } from './states/global/header-state';
 import { NavBar } from './layout/root-layout/nav/NavBar';
 import { Suspense } from 'react';
+import { LoadingScreen } from '../ui/LoadingScreen';
 
 export default function RootLayout({
   children,
@@ -21,7 +22,7 @@ export default function RootLayout({
         <RootHead />
         <body>
           <ConfigProvider>
-            <Suspense fallback={'loading'}>
+            <Suspense fallback={<LoadingScreen />}>
               <NavBar>{children}</NavBar>
             </Suspense>
           </ConfigProvider>
