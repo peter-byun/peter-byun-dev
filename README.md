@@ -1,9 +1,12 @@
 # Peter Byun's Web Dev Blog
 
-It's my blog/a playground for new tools, </br>
+A blog/playground for new tools, </br>
 and I though it might be useful for someone who wants to build a blog using Notion APIs. </br>
 
+- [🔗 Link to the blog](peter-byun.dev/)
+
 ### Tools Used
+
 - Notion APIs
 - Vercel
 - Next.js App Router
@@ -12,6 +15,7 @@ and I though it might be useful for someone who wants to build a blog using Noti
 ### Commands
 
 #### Load Environment Variables
+
 ```
 pnpm install
 pnpm run vercel:link
