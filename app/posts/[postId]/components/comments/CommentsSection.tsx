@@ -1,4 +1,5 @@
 import './CommentsSection.module.scss';
+import './CommentsSection.css';
 
 import {
   FormEvent,
@@ -27,6 +28,7 @@ import { useToast } from '../../../../../ui/toast/useToast';
 
 import styles from './CommentsSection.module.scss';
 import { useRouter } from 'next/navigation';
+import { BottomSheet } from '@plainsheet/react';
 
 interface CommentsSectionProps {
   postId?: string | string[];
@@ -106,6 +108,7 @@ export const CommentsSection = ({
       createComment(commentPayload)
         .then(() => {
           router.refresh();
+          setIsOpen(false);
         })
         .catch(() => {
           toast.push(ERROR_MESSAGES.COMMENT_POSTING_FAILED);
@@ -139,66 +142,80 @@ export const CommentsSection = ({
     Parameters<typeof handleCommentLikeClick>
   >(handleCommentLikeClick);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <section className={styles.postCommentSection}>
-      <H level={3}>Comments</H>
-      <form onSubmit={onSubmit} className={styles.commentWriter}>
-        <div className={styles.commentWriterId}>
-          <div className={styles.inputName}>
-            <Input type="text" {...register('name')}>
-              Name
-            </Input>
-            <InputError>{errors.name?.message}</InputError>
-          </div>
-
-          <div className={styles.commentEmailWrapper}>
-            <Input
-              type="email"
-              className={styles.commentEmail}
-              {...register('email')}
-            >
-              Email (optional)
-            </Input>
-            <InputError>{errors.email?.message}</InputError>
-          </div>
-        </div>
-
-        <div className={styles.viewerCommentContent}>
-          <label htmlFor="viewer-comment-editor-text-area">Content</label>
-          <TextArea
-            id="viewer-comment-editor-text-area"
-            {...register('content')}
-          />
-          <Button isLoading={isPending}>Submit</Button>
-        </div>
-
-        <InputError>{errors.content?.message}</InputError>
-      </form>
-
-      {commentsToShow &&
-        commentsToShow.map((comment) => (
-          <article className={styles.commentContainer} key={comment.id}>
-            <span className={styles.commentWriterName}>{comment.name}</span>
-            <p>{comment.content}</p>
-            <div className={styles.commentBox}>
-              <Button
-                onClick={() => {
-                  throttledHandleCommentLikeClick(comment.id);
-                }}
-                custom
-              >
-                🤍
-              </Button>
-              <span>{comment.likes}</span>
+    <section>
+      <Button
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
+        Write a Comment 📝
+      </Button>
+      <BottomSheet
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        rootClass="bottomSheetRoot"
+      >
+        <form onSubmit={onSubmit} className={styles.postCommentSection}>
+          <div className={styles.commentWriterId}>
+            <div className={styles.inputName}>
+              <Input type="text" {...register('name')}>
+                Name
+              </Input>
+              <InputError>{errors.name?.message}</InputError>
             </div>
-          </article>
-        ))}
 
+            <div className={styles.commentEmailWrapper}>
+              <Input
+                type="email"
+                className={styles.commentEmail}
+                {...register('email')}
+              >
+                Email (optional)
+              </Input>
+              <InputError>{errors.email?.message}</InputError>
+            </div>
+          </div>
+
+          <div className={styles.viewerCommentContent}>
+            <label htmlFor="viewer-comment-editor-text-area">Content</label>
+            <TextArea
+              id="viewer-comment-editor-text-area"
+              {...register('content')}
+            />
+            <Button isLoading={isPending}>Submit</Button>
+          </div>
+          <InputError>{errors.content?.message}</InputError>
+        </form>
+      </BottomSheet>
       <Toast
         isOpen={toast.isOpen}
         setIsOpen={toast.setIsOpen}
         messages={toast.messages}
       />
+
+      <H level={3}>Comments</H>
+      {commentsToShow && commentsToShow.length
+        ? commentsToShow.map((comment) => (
+            <article className={styles.commentContainer} key={comment.id}>
+              <span className={styles.commentWriterName}>{comment.name}</span>
+              <p>{comment.content}</p>
+              <div className={styles.commentBox}>
+                <Button
+                  onClick={() => {
+                    throttledHandleCommentLikeClick(comment.id);
+                  }}
+                  custom
+                >
+                  🤍
+                </Button>
+                <span>{comment.likes}</span>
+              </div>
+            </article>
+          ))
+        : 'Leave the first comment!'}
     </section>
   );
 };

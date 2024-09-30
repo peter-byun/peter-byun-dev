@@ -20,6 +20,9 @@ importers:
       '@notionhq/client':
         specifier: ^1.0.4
         version: 1.0.4
+      '@plainsheet/react':
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@19.0.0-rc-206df66e-20240912(react@19.0.0-rc-206df66e-20240912))(react@19.0.0-rc-206df66e-20240912)
       '@prisma/client':
         specifier: ^4.0.0
         version: 4.16.2(prisma@4.16.2)
@@ -617,6 +620,18 @@ packages:
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@plainsheet/core@0.6.0':
+    resolution: {integrity: sha512-gp5hW8HGAz7AWeQWJ5imr6yVzFL2xXiKbeZy5XqDdizorwFw5FWhXGe/BIC4iIRGbYlZUdxbwjz7aq40gtM0eA==}
+
+  '@plainsheet/react@0.3.1':
+    resolution: {integrity: sha512-ltaKQr+B0GBvRD57bE6dGZWS1LNdHqm86sdzkEoEuhffauUp00CuhXul5bhvIpwovbjOQX3dHi3CmBmKwBl6Iw==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+
+  '@plainsheet/utility@0.0.3':
+    resolution: {integrity: sha512-J2MTSp3d9IZaLJt06p7WX63rK/y44EPVzJhHVOMSOmGkbTi1ZpX2eArEnKrXT5oFStHWknRYo6KbSIpz6YsrOA==}
 
   '@prisma/client@4.16.2':
     resolution: {integrity: sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==}
@@ -4253,6 +4268,17 @@ snapshots:
       - encoding
 
   '@pkgr/core@0.1.1': {}
+
+  '@plainsheet/core@0.6.0': {}
+
+  '@plainsheet/react@0.3.1(react-dom@19.0.0-rc-206df66e-20240912(react@19.0.0-rc-206df66e-20240912))(react@19.0.0-rc-206df66e-20240912)':
+    dependencies:
+      '@plainsheet/core': 0.6.0
+      '@plainsheet/utility': 0.0.3
+      react: 19.0.0-rc-206df66e-20240912
+      react-dom: 19.0.0-rc-206df66e-20240912(react@19.0.0-rc-206df66e-20240912)
+
+  '@plainsheet/utility@0.0.3': {}
 
   '@prisma/client@4.16.2(prisma@4.16.2)':
     dependencies:
